@@ -1,1 +1,234 @@
-kalkulator modulo
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamila - 262505022 - Kalkulator Aritmetika Modular</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f1f5f9;
+        }
+
+        .container {
+            max-width: 750px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        .hasil {
+            background: #e0f2fe;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .angka-hasil {
+            font-size: 40px;
+            font-weight: bold;
+            color: #0369a1;
+        }
+
+        .langkah {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Kalkulator Aritmetika Modular</h2>
+        <p class="text-muted">
+            Implementasi Matematika Informatika
+        </p>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <h5 class="mb-3">Input Perhitungan</h5>
+
+            <div class="mb-3">
+                <label class="form-label">Bilangan Pertama (a)</label>
+                <input type="number" id="angkaA"
+                       class="form-control"
+                       placeholder="Masukkan bilangan pertama">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Operasi</label>
+                <select id="operasi" class="form-select">
+                    <option value="tambah">Penjumlahan (+)</option>
+                    <option value="kurang">Pengurangan (-)</option>
+                    <option value="kali">Perkalian (×)</option>
+                    <option value="pangkat">Perpangkatan (^)</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Bilangan Kedua (b)</label>
+                <input type="number" id="angkaB"
+                       class="form-control"
+                       placeholder="Masukkan bilangan kedua">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Modulus (n)</label>
+                <input type="number" id="modulus"
+                       class="form-control"
+                       placeholder="Masukkan modulus">
+            </div>
+
+            <button onclick="hitungModulo()"
+                    class="btn btn-primary w-100">
+                Hitung Modulo
+            </button>
+
+            <button onclick="resetForm()"
+                    class="btn btn-outline-secondary w-100 mt-2">
+                Reset
+            </button>
+
+            <hr class="my-4">
+
+            <h5 class="mb-3">Hasil Perhitungan</h5>
+
+            <div class="hasil mb-3">
+                <div class="text-muted">Hasil Modulo</div>
+                <div class="angka-hasil" id="hasil">-</div>
+            </div>
+
+            <div class="langkah">
+                <h6 class="fw-bold">Langkah Perhitungan:</h6>
+                <div id="detail" class="text-muted">
+                    Hasil perhitungan akan ditampilkan di sini.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center mt-4 text-muted">
+        <small>Materi Matematika Informatika</small>
+    </div>
+
+</div>
+
+<script>
+
+function hitungModulo() {
+
+    // Mengambil input
+    let a = Number(document.getElementById("angkaA").value);
+    let b = Number(document.getElementById("angkaB").value);
+    let n = Number(document.getElementById("modulus").value);
+
+    let operasi = document.getElementById("operasi").value;
+
+    let hasil;
+    let nilai;
+    let rumus;
+
+    // Validasi input
+    if (
+        document.getElementById("angkaA").value === "" ||
+        document.getElementById("angkaB").value === "" ||
+        document.getElementById("modulus").value === ""
+    ) {
+        alert("Semua input harus diisi!");
+        return;
+    }
+
+    if (!Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(n) ||
+        n <= 0) {
+        alert("Masukkan bilangan bulat yang valid dan modulus harus lebih dari 0!");
+        return;
+    }
+
+    // Proses operasi
+    switch (operasi) {
+
+        case "tambah":
+            nilai = a + b;
+            rumus = a + " + " + b;
+            break;
+
+        case "kurang":
+            nilai = a - b;
+            rumus = a + " - " + b;
+            break;
+
+        case "kali":
+            nilai = a * b;
+            rumus = a + " × " + b;
+            break;
+
+        case "pangkat":
+            if (b < 0 || !Number.isSafeInteger(b)) {
+                alert("Pangkat harus bilangan bulat nonnegatif!");
+                return;
+            }
+
+            if (!Number.isSafeInteger(Math.pow(a, b))) {
+                alert("Hasil terlalu besar untuk dihitung dengan aman!");
+                return;
+            }
+
+            nilai = Math.pow(a, b);
+            rumus = a + " ^ " + b;
+            break;
+    }
+
+    if (!Number.isSafeInteger(nilai)) {
+        alert("Hasil operasi terlalu besar!");
+        return;
+    }
+
+    // Menghitung modulo
+    // Rumus ini memastikan hasil tidak negatif
+    hasil = ((nilai % n) + n) % n;
+
+    // Menampilkan hasil
+    document.getElementById("hasil").innerText = hasil;
+
+    document.getElementById("detail").innerHTML =
+        "<p><b>Operasi:</b> " + rumus + "</p>" +
+        "<p><b>Nilai operasi:</b> " + nilai + "</p>" +
+        "<p><b>Modulus:</b> " + n + "</p>" +
+        "<p><b>Perhitungan:</b> " + nilai +
+        " mod " + n + " = " + hasil + "</p>" +
+        "<p class='text-success fw-bold mb-0'>" +
+        "Jadi, hasilnya adalah " + hasil + "</p>";
+}
+
+function resetForm() {
+
+    document.getElementById("angkaA").value = "";
+    document.getElementById("angkaB").value = "";
+    document.getElementById("modulus").value = "";
+
+    document.getElementById("hasil").innerText = "-";
+
+    document.getElementById("detail").innerText =
+        "Hasil perhitungan akan ditampilkan di sini.";
+}
+
+</script>
+
+</body>
+</html>
+
