@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kamila - 262505022 - Kalkulator Aritmetika Modular</title>
 
-    <!-- Bootstrap 5 CDN -->
+    <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background: #f1f5f9;
+            background: #f1f4f9;
         }
 
         .container {
-            max-width: 750px;
+            max-width: 850px;
         }
 
         .card {
@@ -24,22 +24,14 @@
         }
 
         .hasil {
-            background: #e0f2fe;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .angka-hasil {
-            font-size: 40px;
+            font-size: 28px;
             font-weight: bold;
-            color: #0369a1;
+            color: #0d6efd;
         }
 
-        .langkah {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 10px;
+        .judul {
+            font-weight: bold;
+            color: #0d6efd;
         }
     </style>
 </head>
@@ -49,26 +41,41 @@
 <div class="container py-5">
 
     <div class="text-center mb-4">
-        <h2 class="fw-bold">Kalkulator Aritmetika Modular</h2>
+        <h2 class="judul">Kalkulator Aritmetika Modular</h2>
         <p class="text-muted">
-            Implementasi Matematika Informatika
+            Mata Kuliah Matematika Informatika
         </p>
     </div>
 
-    <div class="card shadow-sm">
+    <!-- KALKULATOR MODULAR -->
+    <div class="card shadow-sm mb-4">
         <div class="card-body p-4">
 
-            <h5 class="mb-3">Input Perhitungan</h5>
+            <h5 class="mb-3">1. Operasi Aritmetika Modular</h5>
 
             <div class="mb-3">
-                <label class="form-label">Bilangan Pertama (a)</label>
+                <label class="form-label">Bilangan A</label>
                 <input type="number" id="angkaA"
-                       class="form-control"
-                       placeholder="Masukkan bilangan pertama">
+                    class="form-control" step="1"
+                    placeholder="Masukkan bilangan A">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Operasi</label>
+                <label class="form-label">Bilangan B</label>
+                <input type="number" id="angkaB"
+                    class="form-control" step="1"
+                    placeholder="Masukkan bilangan B">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Modulus (n)</label>
+                <input type="number" id="modulus"
+                    class="form-control" min="1" step="1"
+                    placeholder="Masukkan modulus">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Pilih Operasi</label>
                 <select id="operasi" class="form-select">
                     <option value="tambah">Penjumlahan (+)</option>
                     <option value="kurang">Pengurangan (-)</option>
@@ -77,158 +84,282 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Bilangan Kedua (b)</label>
-                <input type="number" id="angkaB"
-                       class="form-control"
-                       placeholder="Masukkan bilangan kedua">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Modulus (n)</label>
-                <input type="number" id="modulus"
-                       class="form-control"
-                       placeholder="Masukkan modulus">
-            </div>
-
-            <button onclick="hitungModulo()"
-                    class="btn btn-primary w-100">
-                Hitung Modulo
+            <button onclick="hitungModular()"
+                class="btn btn-primary w-100">
+                Hitung Modular
             </button>
 
-            <button onclick="resetForm()"
-                    class="btn btn-outline-secondary w-100 mt-2">
-                Reset
-            </button>
-
-            <hr class="my-4">
-
-            <h5 class="mb-3">Hasil Perhitungan</h5>
-
-            <div class="hasil mb-3">
-                <div class="text-muted">Hasil Modulo</div>
-                <div class="angka-hasil" id="hasil">-</div>
-            </div>
-
-            <div class="langkah">
-                <h6 class="fw-bold">Langkah Perhitungan:</h6>
-                <div id="detail" class="text-muted">
-                    Hasil perhitungan akan ditampilkan di sini.
-                </div>
-            </div>
+            <div id="hasilModular" class="mt-4"></div>
 
         </div>
     </div>
 
-    <div class="text-center mt-4 text-muted">
-        <small>Materi Matematika Informatika</small>
+
+    <!-- PENGECEKAN KONGRUENSI -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <h5 class="mb-3">2. Pengecekan Kongruensi</h5>
+
+            <p>
+                Periksa apakah dua bilangan memenuhi:
+            </p>
+
+            <h5 class="text-center text-primary mb-4">
+                a ≡ b (mod n)
+            </h5>
+
+            <div class="mb-3">
+                <label class="form-label">Bilangan a</label>
+                <input type="number" id="kongA"
+                    class="form-control" step="1"
+                    placeholder="Masukkan bilangan a">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Bilangan b</label>
+                <input type="number" id="kongB"
+                    class="form-control" step="1"
+                    placeholder="Masukkan bilangan b">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Modulus (n)</label>
+                <input type="number" id="kongN"
+                    class="form-control" min="1" step="1"
+                    placeholder="Masukkan modulus">
+            </div>
+
+            <button onclick="cekKongruensi()"
+                class="btn btn-success w-100">
+                Cek Kongruensi
+            </button>
+
+            <div id="hasilKongruensi" class="mt-4"></div>
+
+        </div>
+    </div>
+
+
+    <!-- INFORMASI -->
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <h5 class="judul">Informasi Materi</h5>
+
+            <p>
+                Aritmetika modular adalah operasi matematika
+                yang menggunakan sisa hasil pembagian.
+            </p>
+
+            <p><b>Rumus modulo:</b></p>
+            <h5 class="text-center">a mod n = r</h5>
+
+            <p class="mt-3"><b>Rumus kongruensi:</b></p>
+            <h5 class="text-center">a ≡ b (mod n)</h5>
+
+            <p class="mb-0">
+                Dua bilangan dikatakan kongruen apabila
+                memiliki sisa pembagian yang sama terhadap
+                modulus yang digunakan.
+            </p>
+        </div>
     </div>
 
 </div>
 
+
 <script>
 
-function hitungModulo() {
-
-    // Mengambil input
-    let a = Number(document.getElementById("angkaA").value);
-    let b = Number(document.getElementById("angkaB").value);
-    let n = Number(document.getElementById("modulus").value);
-
-    let operasi = document.getElementById("operasi").value;
-
-    let hasil;
-    let nilai;
-    let rumus;
-
-    // Validasi input
-    if (
-        document.getElementById("angkaA").value === "" ||
-        document.getElementById("angkaB").value === "" ||
-        document.getElementById("modulus").value === ""
-    ) {
-        alert("Semua input harus diisi!");
-        return;
-    }
-
-    if (!Number.isSafeInteger(a) ||
-        !Number.isSafeInteger(b) ||
-        !Number.isSafeInteger(n) ||
-        n <= 0) {
-        alert("Masukkan bilangan bulat yang valid dan modulus harus lebih dari 0!");
-        return;
-    }
-
-    // Proses operasi
-    switch (operasi) {
-
-        case "tambah":
-            nilai = a + b;
-            rumus = a + " + " + b;
-            break;
-
-        case "kurang":
-            nilai = a - b;
-            rumus = a + " - " + b;
-            break;
-
-        case "kali":
-            nilai = a * b;
-            rumus = a + " × " + b;
-            break;
-
-        case "pangkat":
-            if (b < 0 || !Number.isSafeInteger(b)) {
-                alert("Pangkat harus bilangan bulat nonnegatif!");
-                return;
-            }
-
-            if (!Number.isSafeInteger(Math.pow(a, b))) {
-                alert("Hasil terlalu besar untuk dihitung dengan aman!");
-                return;
-            }
-
-            nilai = Math.pow(a, b);
-            rumus = a + " ^ " + b;
-            break;
-    }
-
-    if (!Number.isSafeInteger(nilai)) {
-        alert("Hasil operasi terlalu besar!");
-        return;
-    }
-
-    // Menghitung modulo
-    // Rumus ini memastikan hasil tidak negatif
-    hasil = ((nilai % n) + n) % n;
-
-    // Menampilkan hasil
-    document.getElementById("hasil").innerText = hasil;
-
-    document.getElementById("detail").innerHTML =
-        "<p><b>Operasi:</b> " + rumus + "</p>" +
-        "<p><b>Nilai operasi:</b> " + nilai + "</p>" +
-        "<p><b>Modulus:</b> " + n + "</p>" +
-        "<p><b>Perhitungan:</b> " + nilai +
-        " mod " + n + " = " + hasil + "</p>" +
-        "<p class='text-success fw-bold mb-0'>" +
-        "Jadi, hasilnya adalah " + hasil + "</p>";
+// Fungsi menghitung modulo dengan hasil positif
+function modulo(a, n) {
+    return ((a % n) + n) % n;
 }
 
-function resetForm() {
 
-    document.getElementById("angkaA").value = "";
-    document.getElementById("angkaB").value = "";
-    document.getElementById("modulus").value = "";
+// Fungsi perpangkatan modular menggunakan BigInt
+function pangkatModular(a, b, n) {
+    let hasil = 1n;
+    a = moduloBigInt(a, n);
 
-    document.getElementById("hasil").innerText = "-";
+    while (b > 0n) {
+        if (b % 2n === 1n) {
+            hasil = (hasil * a) % n;
+        }
 
-    document.getElementById("detail").innerText =
-        "Hasil perhitungan akan ditampilkan di sini.";
+        a = (a * a) % n;
+        b = b / 2n;
+    }
+
+    return hasil;
+}
+
+function moduloBigInt(a, n) {
+    return ((a % n) + n) % n;
+}
+
+
+// Validasi input bilangan bulat
+function ambilBilangan(id) {
+    const nilai = document.getElementById(id).value.trim();
+
+    if (nilai === "" || !/^-?\d+$/.test(nilai)) {
+        throw new Error("Semua input harus berupa bilangan bulat.");
+    }
+
+    return BigInt(nilai);
+}
+
+
+// 1. FUNGSI HITUNG MODULAR
+function hitungModular() {
+
+    try {
+        let a = ambilBilangan("angkaA");
+        let b = ambilBilangan("angkaB");
+        let n = ambilBilangan("modulus");
+
+        let operasi = document.getElementById("operasi").value;
+
+        if (n <= 0n) {
+            throw new Error("Modulus harus lebih besar dari 0.");
+        }
+
+        let hasil;
+        let rumus;
+        let proses;
+
+        switch (operasi) {
+
+            case "tambah":
+                hasil = moduloBigInt(a + b, n);
+                rumus = "(a + b) mod n";
+                proses = `(${a} + ${b}) mod ${n}`;
+                break;
+
+            case "kurang":
+                hasil = moduloBigInt(a - b, n);
+                rumus = "(a - b) mod n";
+                proses = `(${a} - ${b}) mod ${n}`;
+                break;
+
+            case "kali":
+                hasil = moduloBigInt(a * b, n);
+                rumus = "(a × b) mod n";
+                proses = `(${a} × ${b}) mod ${n}`;
+                break;
+
+            case "pangkat":
+                if (b < 0n) {
+                    throw new Error("Pangkat harus bilangan bulat nonnegatif.");
+                }
+
+                hasil = pangkatModular(a, b, n);
+                rumus = "a^b mod n";
+                proses = `${a}^${b} mod ${n}`;
+                break;
+        }
+
+        document.getElementById("hasilModular").innerHTML = `
+            <div class="alert alert-primary">
+                <h6>Hasil Perhitungan</h6>
+                <p>${rumus}</p>
+                <p>${proses}</p>
+                <hr>
+                <div class="hasil">${hasil.toString()}</div>
+            </div>
+        `;
+
+    } catch (error) {
+        tampilkanError("hasilModular", error.message);
+    }
+}
+
+
+// 2. FUNGSI CEK KONGRUENSI
+function cekKongruensi() {
+
+    try {
+        let a = ambilBilangan("kongA");
+        let b = ambilBilangan("kongB");
+        let n = ambilBilangan("kongN");
+
+        if (n <= 0n) {
+            throw new Error("Modulus harus lebih besar dari 0.");
+        }
+
+        // Menghitung sisa pembagian
+        let sisaA = moduloBigInt(a, n);
+        let sisaB = moduloBigInt(b, n);
+
+        // Mengecek kongruensi
+        let kongruen = sisaA === sisaB;
+
+        // Menampilkan hasil
+        let hasilHTML = `
+            <div class="alert ${kongruen ? 'alert-success' : 'alert-danger'}">
+
+                <h5>
+                    ${kongruen
+                        ? '✓ KEDUA BILANGAN KONGRUEN'
+                        : '✗ KEDUA BILANGAN TIDAK KONGRUEN'}
+                </h5>
+
+                <hr>
+
+                <p><b>Persamaan:</b></p>
+
+                <h4 class="text-center">
+                    ${a} ≡ ${b} (mod ${n})
+                </h4>
+
+                <hr>
+
+                <p><b>Langkah pengecekan:</b></p>
+
+                <p>
+                    ${a} mod ${n} = ${sisaA}
+                </p>
+
+                <p>
+                    ${b} mod ${n} = ${sisaB}
+                </p>
+
+                <hr>
+
+                <p><b>Kesimpulan:</b></p>
+
+                ${
+                    kongruen
+                    ? `Karena sisa pembagian sama, yaitu
+                       ${sisaA}, maka ${a} dan ${b}
+                       <b>KONGRUEN</b> modulo ${n}.`
+                    : `Karena sisa pembagian berbeda,
+                       yaitu ${sisaA} dan ${sisaB},
+                       maka ${a} dan ${b}
+                       <b>TIDAK KONGRUEN</b> modulo ${n}.`
+                }
+
+            </div>
+        `;
+
+        document.getElementById("hasilKongruensi").innerHTML = hasilHTML;
+
+    } catch (error) {
+        tampilkanError("hasilKongruensi", error.message);
+    }
+}
+
+
+// Menampilkan pesan error
+function tampilkanError(id, pesan) {
+    document.getElementById(id).innerHTML = `
+        <div class="alert alert-warning">
+            ${pesan}
+        </div>
+    `;
 }
 
 </script>
 
 </body>
 </html>
-
