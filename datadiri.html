@@ -2,735 +2,756 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Pribadi - Black & White Cat</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biodata Online | Cat Journal</title>
 
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background: #f5f5f5;
-            color: #222;
-            font-family: 'Trebuchet MS', sans-serif;
-            scroll-behavior: smooth;
-        }
+<style>
+:root {
+    --hitam: #252525;
+    --putih: #fffefa;
+    --abu: #e9e7e1;
+    --abu2: #d5d2ca;
+}
 
-        /* Navbar */
-        .navbar {
-            background: #171717;
-        }
+body {
+    background: #f2f0e9;
+    color: var(--hitam);
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0;
+}
 
-        .navbar-brand, .nav-link {
-            color: white !important;
-        }
+/* Ornamen gelombang */
+.wave {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    z-index: -1;
+    opacity: .45;
+    border: 8px solid #333;
+    border-radius: 45% 55% 60% 40%;
+}
 
-        .nav-link:hover {
-            color: #bdbdbd !important;
-        }
+.wave.top-left {
+    top: -90px;
+    left: -65px;
+}
 
-        /* Semua section */
-        section {
-            padding: 90px 20px;
-            position: relative;
-            overflow: hidden;
-        }
+.wave.top-right {
+    top: -90px;
+    right: -65px;
+}
 
-        .section-title {
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 35px;
-        }
+.wave.bottom-left {
+    bottom: -90px;
+    left: -65px;
+}
 
-        /* Ornamen gelombang sudut */
-        .wave {
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            opacity: 0.12;
-            border-radius: 45% 55% 65% 35%;
-            background: #000;
-            z-index: 0;
-        }
+.wave.bottom-right {
+    bottom: -90px;
+    right: -65px;
+}
 
-        .wave.top-left {
-            top: -60px;
-            left: -40px;
-        }
+.navbar {
+    background: #252525;
+}
 
-        .wave.bottom-right {
-            bottom: -60px;
-            right: -40px;
-        }
+.navbar-brand, .nav-link {
+    color: white !important;
+}
 
-        .content {
-            position: relative;
-            z-index: 1;
-        }
+.nav-link:hover {
+    color: #cfcfcf !important;
+}
 
-        /* Beranda */
-        #beranda {
-            background: white;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-        }
+section {
+    padding: 75px 20px;
+    scroll-margin-top: 65px;
+}
 
-        .cat-image {
-            width: 230px;
-            height: 230px;
-            margin: auto;
-            background: white;
-            border: 5px solid #222;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 130px;
-            box-shadow: 8px 8px 0 #aaa;
-        }
+.kartu {
+    background: var(--putih);
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 5px 5px 0 #333;
+    margin-bottom: 25px;
+}
 
-        .btn-dark-custom {
-            background: #222;
-            color: white;
-            border-radius: 25px;
-            padding: 10px 25px;
-            text-decoration: none;
-        }
+.hero {
+    text-align: center;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-        .btn-dark-custom:hover {
-            background: #555;
-            color: white;
-        }
+.cat {
+    width: 230px;
+    max-width: 70%;
+    margin-bottom: 20px;
+}
 
-        /* Biodata */
-        #biodata {
-            background: #ededed;
-        }
+.judul {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 35px;
+}
 
-        .profile-card {
-            background: white;
-            border: 2px solid #222;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 7px 7px 0 #aaa;
-        }
+.btn-cat {
+    background: #252525;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 25px;
+}
 
-        .profile-cat {
-            font-size: 100px;
-            text-align: center;
-        }
+.btn-cat:hover {
+    background: #555;
+    color: white;
+}
 
-        .info {
-            padding: 10px;
-            border-bottom: 1px dashed #aaa;
-        }
+.form-control, .form-select {
+    border: 1.5px solid #333;
+    border-radius: 10px;
+}
 
-        /* Minat dan bakat */
-        #minat {
-            background: white;
-        }
+.hasil {
+    background: #e9e7e1;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
 
-        .interest-card {
-            background: #f0f0f0;
-            border: 2px solid #222;
-            border-radius: 18px;
-            padding: 25px;
-            height: 100%;
-            text-align: center;
-            transition: 0.3s;
-        }
+footer {
+    background: #252525;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
 
-        .interest-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 5px 5px 0 #aaa;
-        }
-
-        .interest-icon {
-            font-size: 45px;
-        }
-
-        /* Bukti belajar */
-        #bukti {
-            background: #ededed;
-        }
-
-        .calculator {
-            background: white;
-            border: 2px solid #222;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 5px 5px 0 #aaa;
-        }
-
-        .calculator h4 {
-            font-weight: bold;
-        }
-
-        .result {
-            background: #222;
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            word-break: break-word;
-        }
-
-        .explanation {
-            background: #f2f2f2;
-            border-left: 5px solid #222;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .form-control, .form-select {
-            border: 1px solid #555;
-        }
-
-        /* Footer */
-        footer {
-            background: #171717;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-        @media(max-width: 768px) {
-            section {
-                padding: 65px 15px;
-            }
-        }
-    </style>
+.tag {
+    display: inline-block;
+    background: #252525;
+    color: white;
+    border-radius: 20px;
+    padding: 7px 15px;
+    margin: 5px;
+}
+</style>
 </head>
 
 <body>
 
+<!-- Ornamen sudut -->
+<div class="wave top-left"></div>
+<div class="wave top-right"></div>
+<div class="wave bottom-left"></div>
+<div class="wave bottom-right"></div>
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="#beranda">
-            🐈 Black & White Cat
-        </a>
+<div class="container">
+    <a class="navbar-brand fw-bold" href="#beranda">
+        🐈 Cat Journal
+    </a>
 
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <button class="navbar-toggler" data-bs-toggle="collapse"
+    data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#beranda">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#biodata">Biodata</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#minat">Minat & Bakat</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#bukti">Bukti Belajar</a>
-                </li>
-            </ul>
-        </div>
+    <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+            <li class="nav-item"><a class="nav-link" href="#biodata">Biodata</a></li>
+            <li class="nav-item"><a class="nav-link" href="#minat">Minat & Bakat</a></li>
+            <li class="nav-item"><a class="nav-link" href="#bukti">Bukti Belajar</a></li>
+        </ul>
     </div>
+</div>
 </nav>
 
-
 <!-- BERANDA -->
-<section id="beranda">
+<section id="beranda" class="hero">
 
-    <div class="wave top-left"></div>
-    <div class="wave bottom-right"></div>
+<!-- Kucing kartun SVG -->
+<svg class="cat" viewBox="0 0 250 220"
+xmlns="http://www.w3.org/2000/svg">
 
-    <div class="container content">
-        <div class="cat-image">
-            🐈‍⬛
-        </div>
+<!-- Telinga -->
+<path d="M45 85 L48 15 L105 65
+M145 65 L202 15 L205 85"
+fill="#222" stroke="#222" stroke-width="5"/>
 
-        <h1 class="fw-bold mt-4">
-            Welcome to My Personal Website!
-        </h1>
+<!-- Kepala -->
+<circle cx="125" cy="115" r="83"
+fill="white" stroke="#222" stroke-width="6"/>
 
-        <h4 class="text-secondary">
-            Black & White Cat Edition
-        </h4>
+<!-- Corak hitam -->
+<path d="M48 85 Q45 35 90 40
+L105 90 Q85 110 48 85"
+fill="#222"/>
 
-        <p class="mt-3">
-            Selamat datang di website biodata pribadi saya!.
-            Tempat untuk mengenal diri saya dan melihat
-            hasil pembelajaran Matematika Informatika.
-        </p>
+<path d="M160 90 L170 40
+Q210 30 205 85 Q190 110 160 90"
+fill="#222"/>
 
-        <a href="#biodata" class="btn-dark-custom">
-            Kenali Saya →
-        </a>
-    </div>
+<!-- Mata -->
+<ellipse cx="95" cy="115" rx="9" ry="13" fill="#222"/>
+<ellipse cx="155" cy="115" rx="9" ry="13" fill="#222"/>
+
+<!-- Hidung -->
+<path d="M119 135 Q125 125 131 135
+Q125 145 119 135" fill="#222"/>
+
+<!-- Mulut -->
+<path d="M125 145 Q112 160 105 148
+M125 145 Q138 160 145 148"
+stroke="#222" fill="none" stroke-width="3"/>
+
+<!-- Kumis -->
+<path d="M90 140 L35 130 M90 150 L35 160
+M160 140 L215 130 M160 150 L215 160"
+stroke="#222" stroke-width="2"/>
+
+<!-- Badan -->
+<path d="M75 190 Q125 155 175 190
+L185 215 L65 215 Z"
+fill="#222"/>
+</svg>
+
+<h1 class="fw-bold">WELCOME TO MY CAT JOURNAL!</h1>
+
+<p class="fs-5">
+Selamat datang di Biodata Online Pribadiku.
+</p>
+
+<p>
+Tempat mengenal diriku dan melihat hasil belajarku
+dalam Matematika Informatika.
+</p>
+
+<a href="#biodata" class="btn btn-cat">
+Kenali Saya 🐾
+</a>
 </section>
 
-
-<!-- BIODATA PRIBADI -->
+<!-- BIODATA -->
 <section id="biodata">
+<div class="container">
+<h2 class="judul">🐾 BIODATA PRIBADI</h2>
 
-    <div class="wave top-left"></div>
-    <div class="wave bottom-right"></div>
+<div class="kartu">
+<div class="row align-items-center">
 
-    <div class="container content">
+<div class="col-md-4 text-center">
+    <svg viewBox="0 0 200 200" width="180">
+        <circle cx="100" cy="100" r="85"
+        fill="#eee" stroke="#222" stroke-width="4"/>
+        <path d="M45 80 L50 25 L90 60
+        M110 60 L150 25 L155 80"
+        fill="#222"/>
+        <circle cx="100" cy="95" r="55"
+        fill="white" stroke="#222" stroke-width="4"/>
+        <path d="M48 85 Q45 45 85 45 L90 90
+        M110 90 L115 45 Q155 45 152 85"
+        fill="#222"/>
+        <circle cx="80" cy="100" r="6"/>
+        <circle cx="120" cy="100" r="6"/>
+        <path d="M94 115 L106 115 L100 122 Z" fill="#222"/>
+        <path d="M100 122 Q90 135 82 125
+        M100 122 Q110 135 118 125"
+        stroke="#222" fill="none" stroke-width="2"/>
+    </svg>
+    <p class="fw-bold mt-2">My Cat Profile 🐱</p>
+</div>
 
-        <h2 class="section-title">🐾 Biodata Pribadi</h2>
+<div class="col-md-8">
+    <p><b>Nama Lengkap:</b> Kamila Intan Hayati</p>
+    <p><b>NIM:</b> 262505022</p>
+    <p><b>Program Studi:</b> Sistem Informasi</p>
+    <p><b>Universitas:</b> Maso'em</p>
+    <p><b>Tempat, Tanggal Lahir:</b> Garut, 20 Mei 2008</p>
+    <p><b>Email:</b> kamilaintan20@gmail.com</p>
+</div>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-
-                <div class="profile-card">
-
-                    <div class="profile-cat">
-                        🐱
-                    </div>
-
-                    <h3 class="text-center fw-bold">
-                        Tentang Saya
-                    </h3>
-
-                    <div class="info">
-                        <b>Nama:</b> Kamila Intan Hayati
-                    </div>
-
-                    <div class="info">
-                        <b>NIM:</b> 262505022
-                    </div>
-
-
-                    <div class="info">
-                        <b>Program Studi:</b> Sistem Informasi
-                    </div>
-
-                    <div class="info">
-                        <b>Universitas:</b> Maso'em
-                    </div>
-
-                    <div class="info">
-                        <b>Hobi:</b> Manggambar, Mengarang Cerita, mendengarkan musik
-                    </div>
-
-                    <div class="info">
-                        <b>Deskripsi:</b>
-                        Saya adalah mahasiswa yang memiliki
-                        ketertarikan terhadap teknologi,
-                        pemrograman, Desain tampilan.
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
 </section>
-
 
 <!-- MINAT DAN BAKAT -->
 <section id="minat">
+<div class="container">
+<h2 class="judul">🖤 MINAT DAN BAKAT</h2>
 
-    <div class="wave top-left"></div>
-    <div class="wave bottom-right"></div>
+<div class="row">
 
-    <div class="container content">
+<div class="col-md-6">
+<div class="kartu">
+<h4>♡ Minat</h4>
+<p>
+Saya memiliki minat dalam bidang teknologi,
+pemrograman, desain website, dan pengembangan
+aplikasi.
+</p>
 
-        <h2 class="section-title">🐾 Minat dan Bakat</h2>
+<span class="tag">Programming</span>
+<span class="tag">Teknologi</span>
+<span class="tag">Desain Web</span>
+<span class="tag">Matematika</span>
+</div>
+</div>
 
-        <div class="row g-4">
+<div class="col-md-6">
+<div class="kartu">
+<h4>♡ Bakat</h4>
+<p>
+Saya tertarik mengembangkan kemampuan berpikir
+logis, menyelesaikan masalah, dan membuat
+program sederhana menggunakan HTML, CSS,
+dan JavaScript.
+</p>
 
-            <div class="col-md-4">
-                <div class="interest-card">
-                    <div class="interest-icon">💻</div>
-                    <h4 class="fw-bold mt-3">Minat</h4>
-                    <p>
-                        Tertarik mempelajari teknologi,
-                        pemrograman, desain website,
-                        dan perkembangan komputer.
-                    </p>
-                </div>
-            </div>
+<span class="tag">Logika</span>
+<span class="tag">Kreativitas</span>
+<span class="tag">Problem Solving</span>
+</div>
+</div>
 
-            <div class="col-md-4">
-                <div class="interest-card">
-                    <div class="interest-icon">🎨</div>
-                    <h4 class="fw-bold mt-3">Bakat</h4>
-                    <p>
-                        Memiliki ketertarikan dalam
-                        kreativitas, desain, mengembangkan
-                        ide.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="interest-card">
-                    <div class="interest-icon">🐈</div>
-                    <h4 class="fw-bold mt-3">Hobi</h4>
-                    <p>
-                        Menyukai kucing, mendengarkan musik,
-                        bermain game, dan mempelajari
-                        hal-hal baru.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+</div>
+</div>
 </section>
-
 
 <!-- BUKTI BELAJAR -->
 <section id="bukti">
+<div class="container">
 
-    <div class="wave top-left"></div>
-    <div class="wave bottom-right"></div>
+<h2 class="judul">🐾 BUKTI BELAJAR</h2>
 
-    <div class="container content">
+<p class="text-center mb-5">
+Kumpulan kalkulator Matematika Informatika
+sebagai bukti pemahaman materi perkuliahan.
+</p>
 
-        <h2 class="section-title">
-            🐾 Bukti Belajar Matematika Informatika
-        </h2>
+<!-- 1. KALKULATOR BINER -->
+<div class="kartu">
+<h3>1. Kalkulator Sistem Bilangan</h3>
+<p>
+Mengubah bilangan dari sistem Biner, Oktal,
+Desimal, dan Heksadesimal.
+</p>
 
-        <p class="text-center mb-5">
-            Berikut adalah kumpulan kalkulator interaktif
-            sebagai bukti pemahaman materi perkuliahan.
-        </p>
+<label class="form-label">Masukkan Bilangan</label>
+<input type="text" id="angkaBiner"
+class="form-control mb-3" placeholder="Contoh: 1010">
 
+<label class="form-label">Dari Sistem</label>
+<select id="dari" class="form-select mb-3">
+<option value="2">Biner (2)</option>
+<option value="8">Oktal (8)</option>
+<option value="10" selected>Desimal (10)</option>
+<option value="16">Heksadesimal (16)</option>
+</select>
 
-        <!-- KALKULATOR BINER -->
-        <div class="calculator">
+<label class="form-label">Ke Sistem</label>
+<select id="ke" class="form-select mb-3">
+<option value="2">Biner (2)</option>
+<option value="8">Oktal (8)</option>
+<option value="10">Desimal (10)</option>
+<option value="16">Heksadesimal (16)</option>
+</select>
 
-            <h4>1. Kalkulator Bilangan Biner</h4>
+<button class="btn btn-cat" onclick="konversikan()">
+Konversikan
+</button>
 
-            <p>
-                Mengubah bilangan desimal menjadi biner
-                atau bilangan biner menjadi desimal.
-            </p>
+<div class="mt-3">
+<label>Hasil Konversi:</label>
+<div class="hasil" id="hasilBiner">Hasil akan muncul di sini</div>
+</div>
+</div>
 
-            <label class="form-label">Masukkan Angka</label>
-            <input type="text" id="angkaBiner"
-                   class="form-control mb-3"
-                   placeholder="Contoh: 25 atau 11001">
+<!-- 2. KALKULATOR MODULAR -->
+<div class="kartu">
+<h3>2. Kalkulator Aritmetika Modular</h3>
 
-            <label class="form-label">Pilih Konversi</label>
-            <select id="jenisBiner" class="form-select mb-3">
-                <option value="toBinary">Desimal ke Biner</option>
-                <option value="toDecimal">Biner ke Desimal</option>
-            </select>
+<p>
+Digunakan untuk menghitung operasi penjumlahan,
+pengurangan, perkalian, dan perpangkatan modulo.
+</p>
 
-            <button class="btn btn-dark w-100"
-                    onclick="hitungBiner()">
-                Hitung Biner
-            </button>
+<label>Masukkan Nilai A</label>
+<input type="number" id="nilaiA"
+class="form-control mb-3" placeholder="Contoh: 17">
 
-            <div class="result" id="hasilBiner">
-                Hasil akan muncul di sini
-            </div>
+<label>Masukkan Nilai B</label>
+<input type="number" id="nilaiB"
+class="form-control mb-3" placeholder="Contoh: 5">
 
-            <div class="explanation" id="penjelasanBiner">
-                <b>Penjelasan Hasil:</b>
-                Masukkan angka terlebih dahulu untuk melihat
-                hasil konversi dan penjelasannya.
-            </div>
+<label>Masukkan Modulus (m)</label>
+<input type="number" id="modulus"
+class="form-control mb-3" placeholder="Contoh: 5">
 
-        </div>
+<label>Pilih Operasi</label>
+<select id="operasi" class="form-select mb-3">
+<option value="+">Penjumlahan (+)</option>
+<option value="-">Pengurangan (-)</option>
+<option value="*">Perkalian (×)</option>
+<option value="^">Perpangkatan (^)</option>
+</select>
 
+<button class="btn btn-cat" onclick="hitungModular()">
+Hitung Modular
+</button>
 
-        <!-- KALKULATOR MODULAR -->
-        <div class="calculator">
+<div class="mt-3">
+<label>Hasil:</label>
+<div class="hasil" id="hasilModular">
+Hasil akan muncul di sini
+</div>
+</div>
 
-            <h4>2. Kalkulator Aritmetika Modular</h4>
+<hr>
 
-            <p>
-                Digunakan untuk menghitung sisa hasil
-                pembagian suatu bilangan.
-            </p>
+<h4>🐾 Pengecekan Kongruensi</h4>
 
-            <label class="form-label">Masukkan Nilai A</label>
-            <input type="number" id="nilaiA"
-                   class="form-control mb-3"
-                   placeholder="Contoh: 17">
+<p>
+Memeriksa apakah dua bilangan kongruen
+dalam suatu modulus.
+</p>
 
-            <label class="form-label">Masukkan Nilai B</label>
-            <input type="number" id="nilaiB"
-                   class="form-control mb-3"
-                   placeholder="Contoh: 5">
+<label>Bilangan A</label>
+<input type="number" id="kongA"
+class="form-control mb-2" placeholder="Contoh: 17">
 
-            <label class="form-label">Modulus (n)</label>
-            <input type="number" id="modulus"
-                   class="form-control mb-3"
-                   placeholder="Contoh: 4">
+<label>Bilangan B</label>
+<input type="number" id="kongB"
+class="form-control mb-2" placeholder="Contoh: 2">
 
-            <button class="btn btn-dark w-100"
-                    onclick="hitungModular()">
-                Hitung Modular
-            </button>
+<label>Modulus (m)</label>
+<input type="number" id="kongM"
+class="form-control mb-3" placeholder="Contoh: 5">
 
-            <div class="result" id="hasilModular">
-                Hasil akan muncul di sini
-            </div>
+<button class="btn btn-cat" onclick="cekKongruensi()">
+Cek Kongruensi
+</button>
 
-            <div class="explanation" id="penjelasanModular">
-                <b>Penjelasan Hasil:</b>
-                Masukkan nilai A, B, dan modulus untuk
-                memeriksa kongruensi.
-            </div>
+<div class="mt-3">
+<label>Hasil Pengecekan:</label>
+<div class="hasil" id="hasilKongruensi">
+Hasil pengecekan muncul di sini
+</div>
+</div>
 
-        </div>
+</div>
 
+<!-- 3. KALKULATOR KOMBINATORIKA -->
+<div class="kartu">
+<h3>3. Kalkulator Kombinatorika</h3>
 
-        <!-- KALKULATOR KOMBINATORIKA -->
-        <div class="calculator">
+<p>
+Menghitung permutasi dan kombinasi dari
+sekumpulan objek.
+</p>
 
-            <h4>3. Kalkulator Kombinatorika</h4>
+<label>Masukkan nilai n</label>
+<input type="number" id="nilaiN"
+class="form-control mb-3" placeholder="Contoh: 5">
 
-            <p>
-                Menghitung permutasi dan kombinasi
-                berdasarkan jumlah objek.
-            </p>
+<label>Masukkan nilai r</label>
+<input type="number" id="nilaiR"
+class="form-control mb-3" placeholder="Contoh: 2">
 
-            <label class="form-label">Jumlah Objek (n)</label>
-            <input type="number" id="nilaiN"
-                   class="form-control mb-3"
-                   placeholder="Contoh: 5">
+<label>Pilih Perhitungan</label>
+<select id="jenisKombinasi" class="form-select mb-3">
+<option value="P">Permutasi (P)</option>
+<option value="C">Kombinasi (C)</option>
+</select>
 
-            <label class="form-label">Jumlah Pilihan (r)</label>
-            <input type="number" id="nilaiR"
-                   class="form-control mb-3"
-                   placeholder="Contoh: 2">
+<button class="btn btn-cat" onclick="hitungKombinasi()">
+Hitung
+</button>
 
-            <label class="form-label">Jenis Perhitungan</label>
-            <select id="jenisKombinasi"
-                    class="form-select mb-3">
+<div class="mt-3">
+<label>Hasil:</label>
+<div class="hasil" id="hasilKombinasi">
+Hasil akan muncul di sini
+</div>
+</div>
+</div>
 
-                <option value="permutasi">
-                    Permutasi (P)
-                </option>
+<!-- PENJELASAN -->
+<h2 class="judul mt-5">📖 PENJELASAN HASIL KALKULATOR</h2>
 
-                <option value="kombinasi">
-                    Kombinasi (C)
-                </option>
+<div class="kartu">
+<h4>1. Sistem Bilangan</h4>
+<p>
+Kalkulator sistem bilangan digunakan untuk mengubah
+suatu bilangan dari satu basis ke basis lainnya.
+</p>
+<p><b>Contoh:</b> 10 desimal diubah menjadi 1010 biner.</p>
+<p>
+Artinya, nilai 10 dalam sistem desimal memiliki
+nilai yang sama dengan 1010 dalam sistem biner.
+</p>
+</div>
 
-            </select>
+<div class="kartu">
+<h4>2. Aritmetika Modular dan Kongruensi</h4>
+<p>
+Aritmetika modular adalah operasi matematika yang
+menggunakan sisa hasil pembagian.
+</p>
+<p><b>Contoh:</b></p>
+<p>17 mod 5 = 2</p>
+<p>Karena 17 dibagi 5 menghasilkan sisa 2.</p>
 
-            <button class="btn btn-dark w-100"
-                    onclick="hitungKombinasi()">
-                Hitung Kombinatorika
-            </button>
+<p><b>Pengecekan Kongruensi:</b></p>
+<p>17 ≡ 2 (mod 5)</p>
+<p>
+Pernyataan tersebut benar karena 17 dan 2
+memiliki sisa pembagian yang sama jika dibagi 5.
+</p>
+<p>
+Jadi, hasil pengecekan kongruensi menunjukkan
+apakah dua bilangan memiliki sisa yang sama
+terhadap suatu modulus.
+</p>
+</div>
 
-            <div class="result" id="hasilKombinasi">
-                Hasil akan muncul di sini
-            </div>
+<div class="kartu">
+<h4>3. Kombinatorika</h4>
+<p>
+Kombinatorika digunakan untuk menghitung banyaknya
+susunan atau pemilihan objek.
+</p>
 
-            <div class="explanation" id="penjelasanKombinasi">
-                <b>Penjelasan Hasil:</b>
-                Masukkan jumlah objek dan pilihan untuk
-                melihat hasil perhitungan.
-            </div>
+<p><b>Permutasi:</b> Memperhatikan urutan.</p>
+<p>
+Contoh: P(5,2) = 5! / (5-2)! = 20.
+Artinya terdapat 20 susunan berbeda.
+</p>
 
-        </div>
+<p><b>Kombinasi:</b> Tidak memperhatikan urutan.</p>
+<p>
+Contoh: C(5,2) = 5! / (2! × 3!) = 10.
+Artinya terdapat 10 pilihan berbeda.
+</p>
+</div>
 
-    </div>
+</div>
 </section>
 
-
-<!-- FOOTER -->
 <footer>
-    <h5>🐈‍⬛ Black & White Cat Website</h5>
-    <p class="mb-0">
-        Dibuat sebagai tugas Biodata Online Pribadi
-        | Matematika Informatika
-    </p>
-    <p class="mt-2">© 2026 My Personal Website</p>
+<p>🐈 Cat Journal | Biodata Online Pribadi</p>
+<p>Belajar Matematika Informatika dengan menyenangkan ♡</p>
 </footer>
 
-
-<!-- JAVASCRIPT -->
 <script>
 
-    // 1. KALKULATOR BINER
-    function hitungBiner() {
+// ====================================
+// 1. KALKULATOR SISTEM BILANGAN
+// ====================================
 
-        let angka = document.getElementById("angkaBiner").value.trim();
-        let jenis = document.getElementById("jenisBiner").value;
+function konversikan() {
 
-        let hasil = "";
-        let penjelasan = "";
+    let angka = document.getElementById("angkaBiner").value.trim();
+    let dari = parseInt(document.getElementById("dari").value);
+    let ke = parseInt(document.getElementById("ke").value);
 
-        if (angka === "") {
-            alert("Masukkan angka terlebih dahulu!");
-            return;
-        }
+    let hasil = document.getElementById("hasilBiner");
 
-        if (jenis === "toBinary") {
-
-            if (!/^[+-]?\d+$/.test(angka)) {
-                alert("Masukkan bilangan desimal bulat yang valid!");
-                return;
-            }
-
-            let desimal = BigInt(angka);
-            hasil = desimal.toString(2);
-
-            penjelasan =
-                "Bilangan desimal " + angka +
-                " diubah menjadi bilangan biner " + hasil +
-                ". Sistem biner menggunakan angka 0 dan 1.";
-
-        } else {
-
-            if (!/^[01]+$/.test(angka)) {
-                alert("Bilangan biner hanya boleh berisi 0 dan 1!");
-                return;
-            }
-
-            let desimal = parseInt(angka, 2);
-
-            hasil = desimal.toString();
-
-            penjelasan =
-                "Bilangan biner " + angka +
-                " diubah menjadi desimal " + hasil +
-                ". Setiap digit biner dikalikan dengan pangkat 2.";
-        }
-
-        document.getElementById("hasilBiner").innerHTML =
-            "Hasil: " + hasil;
-
-        document.getElementById("penjelasanBiner").innerHTML =
-            "<b>Penjelasan Hasil:</b><br>" + penjelasan;
+    if (angka === "") {
+        hasil.innerHTML = "Masukkan bilangan terlebih dahulu!";
+        return;
     }
 
+    let desimal = parseInt(angka, dari);
 
-    // 2. KALKULATOR MODULAR
-    function hitungModular() {
+    if (isNaN(desimal) ||
+        desimal.toString(dari).toUpperCase() !== angka.toUpperCase()) {
+        hasil.innerHTML = "Bilangan tidak valid untuk basis tersebut!";
+        return;
+    }
 
-        let a = document.getElementById("nilaiA").value;
-        let b = document.getElementById("nilaiB").value;
-        let n = document.getElementById("modulus").value;
+    hasil.innerHTML = desimal.toString(ke).toUpperCase();
+}
 
-        if (a === "" || b === "" || n === "") {
-            alert("Semua nilai harus diisi!");
+
+// ====================================
+// 2. KALKULATOR ARITMETIKA MODULAR
+// ====================================
+
+function hitungModular() {
+
+    let a = Number(document.getElementById("nilaiA").value);
+    let b = Number(document.getElementById("nilaiB").value);
+    let m = Number(document.getElementById("modulus").value);
+    let op = document.getElementById("operasi").value;
+
+    let hasil = document.getElementById("hasilModular");
+
+    if (
+        document.getElementById("nilaiA").value === "" ||
+        document.getElementById("nilaiB").value === "" ||
+        document.getElementById("modulus").value === "" ||
+        !Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(m) ||
+        m <= 0
+    ) {
+        hasil.innerHTML = "Masukkan bilangan bulat yang valid dan modulus lebih dari 0!";
+        return;
+    }
+
+    let nilai;
+
+    if (op === "+") {
+        nilai = a + b;
+    } else if (op === "-") {
+        nilai = a - b;
+    } else if (op === "*") {
+        nilai = a * b;
+    } else if (op === "^") {
+
+        if (b < 0) {
+            hasil.innerHTML = "Pangkat harus bilangan bulat tidak negatif!";
             return;
         }
 
-        a = Number(a);
-        b = Number(b);
-        n = Number(n);
-
-        if (![a, b, n].every(Number.isSafeInteger) || n <= 0) {
-            alert("Masukkan bilangan bulat yang valid dan modulus harus lebih dari 0!");
+        if (b > 10000) {
+            hasil.innerHTML = "Pangkat terlalu besar!";
             return;
         }
 
-        let sisaA = ((a % n) + n) % n;
-        let sisaB = ((b % n) + n) % n;
+        nilai = 1;
 
-        let hasil = sisaA === sisaB;
+        for (let i = 0; i < b; i++) {
+            nilai = (nilai * a) % m;
+        }
+    }
 
-        document.getElementById("hasilModular").innerHTML =
-            "Sisa A = " + sisaA +
+    let sisa = ((nilai % m) + m) % m;
+
+    hasil.innerHTML =
+        "Hasil operasi: " + sisa +
+        "<br>Modulus: " + m +
+        "<br>Perhitungan: " + nilai + " mod " + m;
+}
+
+
+// ====================================
+// PENGECEKAN KONGRUENSI
+// ====================================
+
+function cekKongruensi() {
+
+    let a = Number(document.getElementById("kongA").value);
+    let b = Number(document.getElementById("kongB").value);
+    let m = Number(document.getElementById("kongM").value);
+
+    let hasil = document.getElementById("hasilKongruensi");
+
+    if (
+        document.getElementById("kongA").value === "" ||
+        document.getElementById("kongB").value === "" ||
+        document.getElementById("kongM").value === "" ||
+        !Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(m) ||
+        m <= 0
+    ) {
+        hasil.innerHTML = "Masukkan bilangan bulat yang valid dan modulus lebih dari 0!";
+        return;
+    }
+
+    let sisaA = ((a % m) + m) % m;
+    let sisaB = ((b % m) + m) % m;
+
+    if (sisaA === sisaB) {
+
+        hasil.innerHTML =
+            "BENAR ✓<br>" +
+            a + " ≡ " + b + " (mod " + m + ")" +
+            "<br>Sisa A = " + sisaA +
             "<br>Sisa B = " + sisaB +
-            "<br>" + (hasil ?
-            "A ≡ B (mod " + n + ") ✓" :
-            "A ≢ B (mod " + n + ") ✗");
+            "<br>Kedua bilangan kongruen.";
 
-        document.getElementById("penjelasanModular").innerHTML =
-            "<b>Penjelasan Hasil:</b><br>" +
-            a + " mod " + n + " = " + sisaA +
-            "<br>" +
-            b + " mod " + n + " = " + sisaB +
-            "<br>" +
-            (hasil ?
-            "Karena kedua sisa pembagian sama, maka kedua bilangan kongruen." :
-            "Karena kedua sisa pembagian berbeda, maka kedua bilangan tidak kongruen.");
+    } else {
+
+        hasil.innerHTML =
+            "SALAH ✗<br>" +
+            a + " ≢ " + b + " (mod " + m + ")" +
+            "<br>Sisa A = " + sisaA +
+            "<br>Sisa B = " + sisaB +
+            "<br>Kedua bilangan tidak kongruen.";
+    }
+}
+
+
+// ====================================
+// 3. KALKULATOR KOMBINATORIKA
+// ====================================
+
+function faktorial(n) {
+
+    let hasil = 1;
+
+    for (let i = 1; i <= n; i++) {
+        hasil *= i;
     }
 
+    return hasil;
+}
 
-    // FUNGSI FAKTORIAL
-    function faktorial(n) {
+function hitungKombinasi() {
 
-        let hasil = 1;
+    let n = Number(document.getElementById("nilaiN").value);
+    let r = Number(document.getElementById("nilaiR").value);
 
-        for (let i = 1; i <= n; i++) {
-            hasil *= i;
-        }
+    let jenis = document.getElementById("jenisKombinasi").value;
+    let hasil = document.getElementById("hasilKombinasi");
 
-        return hasil;
+    if (
+        document.getElementById("nilaiN").value === "" ||
+        document.getElementById("nilaiR").value === "" ||
+        !Number.isInteger(n) ||
+        !Number.isInteger(r) ||
+        n < 0 || r < 0 || r > n ||
+        n > 170
+    ) {
+        hasil.innerHTML =
+            "Masukkan bilangan bulat yang valid, 0 ≤ r ≤ n, dan n maksimal 170!";
+        return;
     }
 
+    let nilai;
 
-    // 3. KALKULATOR KOMBINATORIKA
-    function hitungKombinasi() {
+    if (jenis === "P") {
 
-        let n = Number(document.getElementById("nilaiN").value);
-        let r = Number(document.getElementById("nilaiR").value);
+        nilai = faktorial(n) / faktorial(n-r);
 
-        let jenis = document.getElementById("jenisKombinasi").value;
+        hasil.innerHTML =
+            "Permutasi = " + nilai +
+            "<br>Rumus: n! / (n-r)!";
 
-        if (
-            document.getElementById("nilaiN").value === "" ||
-            document.getElementById("nilaiR").value === ""
-        ) {
-            alert("Jumlah objek dan pilihan harus diisi!");
-            return;
-        }
+    } else {
 
-        if (
-            !Number.isSafeInteger(n) ||
-            !Number.isSafeInteger(r) ||
-            n < 0 || r < 0 || r > n || n > 170
-        ) {
-            alert("Masukkan bilangan bulat dengan 0 ≤ r ≤ n dan n maksimal 170!");
-            return;
-        }
+        nilai = faktorial(n) /
+        (faktorial(r) * faktorial(n-r));
 
-        let hasil;
-        let rumus;
-        let penjelasan;
-
-        if (jenis === "permutasi") {
-
-            hasil = faktorial(n) / faktorial(n-r);
-
-            rumus = "P(" + n + "," + r + ") = " +
-                    n + "! / (" + n + "-" + r + ")!";
-
-            penjelasan =
-                "Permutasi memperhatikan urutan. " +
-                "Jadi, terdapat " + hasil +
-                " susunan yang berbeda.";
-
-        } else {
-
-            hasil = faktorial(n) /
-                    (faktorial(r) * faktorial(n-r));
-
-            rumus = "C(" + n + "," + r + ") = " +
-                    n + "! / (" + r + "! × (" + n + "-" + r + ")!)";
-
-            penjelasan =
-                "Kombinasi tidak memperhatikan urutan. " +
-                "Jadi, terdapat " + hasil +
-                " cara memilih objek yang berbeda.";
-        }
-
-        document.getElementById("hasilKombinasi").innerHTML =
-            "Hasil: " + hasil;
-
-        document.getElementById("penjelasanKombinasi").innerHTML =
-            "<b>Penjelasan Hasil:</b><br>" +
-            "Rumus: " + rumus +
-            "<br>" + penjelasan;
+        hasil.innerHTML =
+            "Kombinasi = " + nilai +
+            "<br>Rumus: n! / (r! × (n-r)!)";
     }
+}
 
 </script>
 
