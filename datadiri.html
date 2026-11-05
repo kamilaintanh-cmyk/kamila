@@ -2,808 +2,640 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata Pribadi | Hollow Knight</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Cat Journal | Biodata Online</title>
 
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+:root {
+    --yellow: #f5e6a8;
+    --paper: #fff9e8;
+    --brown: #765438;
+    --pink: #e8a6a6;
+    --dark: #493c28;
+}
 
-        body {
-            margin: 0;
-            background: #080d16;
-            color: #e7edf5;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        h1, h2, h3, .navbar-brand {
-            font-family: 'Cinzel', serif;
-        }
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--yellow);
+    color: var(--dark);
+}
 
-        /* NAVBAR */
-        .navbar {
-            background: rgba(5, 10, 19, 0.96);
-            border-bottom: 1px solid #34465c;
-        }
+/* NAVBAR */
+.navbar {
+    background: #fff4cc;
+    border-bottom: 3px dashed #b18b58;
+    padding: 15px;
+}
 
-        .navbar-brand {
-            color: #dceaff !important;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
+.navbar-brand {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 27px;
+    color: var(--brown);
+    font-weight: bold;
+}
 
-        .nav-link {
-            color: #aebed0 !important;
-            margin-left: 12px;
-        }
+.nav-link {
+    color: var(--brown);
+    font-weight: 700;
+    margin: 0 8px;
+}
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: #ffffff !important;
-        }
+.nav-link:hover {
+    color: #d47e83;
+}
 
-        /* SECTION */
-        section {
-            min-height: 100vh;
-            padding: 100px 20px 60px;
-        }
+/* SECTION */
+section {
+    padding: 65px 20px;
+    min-height: 85vh;
+}
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #dceaff;
-        }
+.paper {
+    background: var(--paper);
+    padding: 35px;
+    border-radius: 15px;
+    border: 2px solid #d9bf83;
+    box-shadow: 5px 6px 0px #c9a96e;
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        #eadfbe 32px
+    );
+}
 
-        .section-title p {
-            color: #91a4bb;
-        }
+.heading {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 40px;
+    color: var(--brown);
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        /* BERANDA */
-        #beranda {
-            background:
-                radial-gradient(ellipse at center, #26374d 0%, #111d30 45%, #080d16 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-        }
+/* BERANDA */
+.hero {
+    text-align: center;
+    padding-top: 50px;
+}
 
-        .hero-title {
-            font-size: clamp(32px, 6vw, 60px);
-            letter-spacing: 5px;
-            color: #e8f0fa;
-            text-shadow: 0 0 20px #7896b9;
-        }
+.hero h1 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 65px;
+    color: var(--brown);
+}
 
-        .hero-subtitle {
-            color: #a9bad0;
-            letter-spacing: 3px;
-            margin-top: 10px;
-        }
+.cat {
+    font-size: 110px;
+    display: inline-block;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
 
-        .arena {
-            width: 100%;
-            max-width: 800px;
-            height: 320px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 35px;
-            border: 1px solid #52677f;
-            border-radius: 15px;
-            background:
-                radial-gradient(circle at 50% 25%, #314761, #17283d 55%, #0a1422);
-            box-shadow: 0 0 35px rgba(89, 139, 190, 0.2);
-        }
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
 
-        .arena::before {
-            content: "THE WORLD OF HOLLOW KNIGHT";
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            color: #8fa8c2;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 3px;
-            font-size: 12px;
-        }
+.cat:hover {
+    transform: rotate(15deg) scale(1.1);
+}
 
-        .ground {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 40px;
-            background: #080e19;
-            border-top: 2px solid #71849a;
-        }
+.btn-cat {
+    background: #a66d43;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-weight: bold;
+}
 
-        /* KARAKTER KNIGHT */
-        #knight {
-            position: absolute;
-            width: 90px;
-            height: 110px;
-            left: 50%;
-            bottom: 35px;
-            transform: translateX(-50%);
-            object-fit: contain;
-            transition: left 0.08s linear, bottom 0.08s linear;
-            filter: drop-shadow(0 0 12px #d5eaff);
-            z-index: 2;
-        }
+.btn-cat:hover {
+    background: #d28c83;
+    color: white;
+}
 
-        .control-info {
-            color: #9eafc3;
-            margin-top: 20px;
-            font-size: 13px;
-        }
+/* BIODATA */
+.profile-card {
+    background: #fff4cc;
+    border: 2px dashed #bd9861;
+    border-radius: 15px;
+    padding: 25px;
+}
 
-        .control-buttons button {
-            width: 48px;
-            height: 42px;
-            margin: 3px;
-            background: #24374e;
-            color: white;
-            border: 1px solid #607995;
-            border-radius: 8px;
-        }
+.profile-cat {
+    font-size: 100px;
+    text-align: center;
+}
 
-        .control-buttons button:hover {
-            background: #476585;
-        }
+.info {
+    padding: 12px;
+    border-bottom: 1px dashed #c4a879;
+}
 
-        /* CARD */
-        .dark-card {
-            background: #131e2e;
-            border: 1px solid #354a62;
-            border-radius: 15px;
-            padding: 25px;
-            height: 100%;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-        }
+/* KALKULATOR */
+.calculator {
+    background: #fff4cc;
+    border: 2px dashed #b18b58;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
 
-        .dark-card h4 {
-            color: #dceaff;
-            font-family: 'Cinzel', serif;
-            margin-bottom: 20px;
-        }
+.calculator h3 {
+    font-family: 'Patrick Hand', cursive;
+    color: var(--brown);
+    font-size: 30px;
+}
 
-        .form-control, .form-select {
-            background: #0a1422;
-            color: white;
-            border: 1px solid #465b73;
-        }
+.form-control, .form-select {
+    background: #fffdf5;
+    border: 1px solid #c9ad7c;
+    border-radius: 10px;
+    padding: 11px;
+}
 
-        .form-control:focus, .form-select:focus {
-            background: #0a1422;
-            color: white;
-            border-color: #91b6df;
-            box-shadow: 0 0 8px rgba(145,182,223,0.3);
-        }
+.result {
+    background: #f5e6a8;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
 
-        .form-select option {
-            background: #101d2d;
-            color: white;
-        }
+footer {
+    background: #fff4cc;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px dashed #b18b58;
+}
 
-        .form-control::placeholder {
-            color: #8495a8;
-        }
+@media(max-width: 768px) {
+    .hero h1 {
+        font-size: 43px;
+    }
 
-        .btn-knight {
-            background: #425f7d;
-            color: white;
-            border: 1px solid #7898b8;
-            transition: 0.3s;
-        }
+    .paper {
+        padding: 20px;
+    }
 
-        .btn-knight:hover {
-            background: #6c89a8;
-            color: white;
-        }
-
-        .result-box {
-            background: #080f1b;
-            border: 1px solid #435b75;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 18px;
-            min-height: 65px;
-            color: #a9d5ff;
-            font-size: 20px;
-            font-weight: 600;
-            overflow-wrap: anywhere;
-        }
-
-        /* BIODATA */
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #8ca9c8;
-            box-shadow: 0 0 20px #536e8d;
-        }
-
-        .bio-item {
-            border-bottom: 1px solid #34465c;
-            padding: 12px 0;
-        }
-
-        .bio-item span {
-            color: #9eafc3;
-        }
-
-        footer {
-            background: #050a12;
-            color: #7f91a7;
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid #34465c;
-        }
-
-        @media(max-width: 576px) {
-            .hero-subtitle {
-                font-size: 12px;
-                letter-spacing: 1px;
-            }
-
-            .arena {
-                height: 260px;
-            }
-
-            #knight {
-                width: 70px;
-                height: 90px;
-            }
-
-            section {
-                padding-top: 90px;
-            }
-        }
-    </style>
+    .heading {
+        font-size: 33px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+<div class="container">
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#beranda">KNIGHT PROFILE</a>
+<a class="navbar-brand" href="#home">🐱 My Cat Journal</a>
 
-        <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<button class="navbar-toggler" type="button"
+data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#beranda">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#bukti">Bukti Belajar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#biodata">Biodata</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="#home">🏠 Beranda</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#biodata">👤 Biodata</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#bukti">📚 Bukti Belajar</a>
+</li>
+
+</ul>
+</div>
+</div>
 </nav>
 
 
-<!-- ================= BERANDA ================= -->
+<!-- BERANDA -->
+<section id="home">
+<div class="container">
 
-<section id="beranda">
+<div class="paper hero">
 
-    <h1 class="hero-title">HOLLOW KNIGHT</h1>
+<div class="cat" onclick="suaraKucing()">🐱</div>
 
-    <p class="hero-subtitle">
-        WELCOME TO MY PERSONAL WEBSITE
-    </p>
+<h1>Welcome to My Journal!</h1>
 
-    <p class="text-secondary">
-        Petualangan dalam dunia Matematika Informatika
-    </p>
+<h4>♡ My Personal Biodata Website ♡</h4>
 
-    <div class="arena" id="arena">
+<p class="mt-3">
+Selamat datang di buku jurnal digital saya.
+Di sini kamu bisa mengenal saya dan melihat
+hasil pembelajaran Matematika Informatika.
+</p>
 
-        <!-- Gambar karakter Knight -->
-        <img src="knight.png" id="knight"
-             alt="Knight">
+<p id="pesanKucing">Meow! Selamat datang di dunia kucing! 🐾</p>
 
-        <div class="ground"></div>
+<a href="#biodata" class="btn btn-cat mt-3">
+Kenali Saya ♡
+</a>
 
-    </div>
+<a href="#bukti" class="btn btn-cat mt-3">
+Lihat Bukti Belajar
+</a>
 
-    <p class="control-info">
-        Gerakkan Knight menggunakan tombol W A S D atau tombol arah.
-    </p>
+<hr>
 
-    <div class="control-buttons text-center">
-        <div>
-            <button onclick="gerak('atas')">▲</button>
-        </div>
-        <div>
-            <button onclick="gerak('kiri')">◀</button>
-            <button onclick="gerak('bawah')">▼</button>
-            <button onclick="gerak('kanan')">▶</button>
-        </div>
-    </div>
+<p>🐾 Made with Love and Cats 🐾</p>
 
-    <a href="#bukti" class="btn btn-knight mt-4">
-        Jelajahi Bukti Belajar
-    </a>
-
+</div>
+</div>
 </section>
 
 
-<!-- ================= BUKTI BELAJAR ================= -->
-
-<section id="bukti">
-
-    <div class="container">
-
-        <div class="section-title">
-            <h2>BUKTI BELAJAR</h2>
-            <p>Kumpulan Kalkulator Matematika Informatika</p>
-        </div>
-
-        <div class="row g-4">
-
-            <!-- KALKULATOR BINER -->
-            <div class="col-lg-4 col-md-6">
-                <div class="dark-card">
-
-                    <h4>01. Kalkulator Biner</h4>
-
-                    <p class="text-secondary">
-                        Konversi bilangan biner dan desimal.
-                    </p>
-
-                    <label class="form-label">Masukkan Bilangan</label>
-                    <input type="text" id="angkaBiner"
-                        class="form-control"
-                        placeholder="Contoh: 1010">
-
-                    <label class="form-label mt-3">Jenis Konversi</label>
-                    <select id="jenisBiner" class="form-select">
-                        <option value="keDesimal">Biner ke Desimal</option>
-                        <option value="keBiner">Desimal ke Biner</option>
-                    </select>
-
-                    <button onclick="hitungBiner()"
-                        class="btn btn-knight w-100 mt-3">
-                        Konversikan
-                    </button>
-
-                    <div class="result-box" id="hasilBiner">
-                        Hasil: -
-                    </div>
-
-                </div>
-            </div>
-
-
-            <!-- KALKULATOR MODULAR -->
-            <div class="col-lg-4 col-md-6">
-                <div class="dark-card">
-
-                    <h4>02. Aritmetika Modular</h4>
-
-                    <p class="text-secondary">
-                        Menghitung operasi bilangan modulo.
-                    </p>
-
-                    <label class="form-label">Bilangan A</label>
-                    <input type="number" id="modA"
-                        class="form-control"
-                        placeholder="Masukkan A">
-
-                    <label class="form-label mt-2">Bilangan B</label>
-                    <input type="number" id="modB"
-                        class="form-control"
-                        placeholder="Masukkan B">
-
-                    <label class="form-label mt-2">Modulus</label>
-                    <input type="number" id="modM"
-                        class="form-control"
-                        placeholder="Masukkan modulus">
-
-                    <label class="form-label mt-2">Operasi</label>
-                    <select id="jenisMod" class="form-select">
-                        <option value="tambah">Penjumlahan (+)</option>
-                        <option value="kurang">Pengurangan (-)</option>
-                        <option value="kali">Perkalian (×)</option>
-                        <option value="pangkat">Perpangkatan (^)</option>
-                    </select>
-
-                    <button onclick="hitungModular()"
-                        class="btn btn-knight w-100 mt-3">
-                        Hitung Modular
-                    </button>
-
-                    <div class="result-box" id="hasilMod">
-                        Hasil: -
-                    </div>
-
-                </div>
-            </div>
-
-
-            <!-- KALKULATOR KOMBINATORIKA -->
-            <div class="col-lg-4 col-md-6">
-                <div class="dark-card">
-
-                    <h4>03. Kombinatorika</h4>
-
-                    <p class="text-secondary">
-                        Menghitung permutasi dan kombinasi.
-                    </p>
-
-                    <label class="form-label">Nilai n</label>
-                    <input type="number" id="nilaiN"
-                        class="form-control"
-                        placeholder="Masukkan nilai n">
-
-                    <label class="form-label mt-2">Nilai r</label>
-                    <input type="number" id="nilaiR"
-                        class="form-control"
-                        placeholder="Masukkan nilai r">
-
-                    <label class="form-label mt-2">Jenis Perhitungan</label>
-                    <select id="jenisKombinasi" class="form-select">
-                        <option value="permutasi">Permutasi (nPr)</option>
-                        <option value="kombinasi">Kombinasi (nCr)</option>
-                    </select>
-
-                    <button onclick="hitungKombinatorika()"
-                        class="btn btn-knight w-100 mt-3">
-                        Hitung
-                    </button>
-
-                    <div class="result-box" id="hasilKombinasi">
-                        Hasil: -
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= BIODATA ================= -->
-
+<!-- BIODATA -->
 <section id="biodata">
+<div class="container">
 
-    <div class="container">
+<div class="paper">
 
-        <div class="section-title">
-            <h2>BIODATA PRIBADI</h2>
-            <p>Informasi dan Identitas Mahasiswa</p>
-        </div>
+<h2 class="heading">♡ My Personal Biodata ♡</h2>
 
-        <div class="row justify-content-center">
+<div class="profile-card">
 
-            <div class="col-lg-7">
+<div class="profile-cat">😺</div>
 
-                <div class="dark-card text-center">
+<h3 class="text-center">Tentang Saya</h3>
 
-                    <!-- Ganti foto-profil.jpg dengan foto sendiri -->
-                    <img src="foto-profil.jpg"
-                         class="profile-img mb-3"
-                         alt="Foto Profil">
+<div class="info">
+<strong>Nama:</strong> Kamila Intan Hayati
+</div>
 
-                    <h3 class="mb-2">NAMA LENGKAP ANDA</h3>
+<div class="info">
+<strong>NIM:</strong> 262505022
+</div>
 
-                    <p class="text-secondary">
-                        Mahasiswa | Program Studi Informatika
-                    </p>
+<div class="info">
+<strong>Program Studi:</strong> Sistem Informasi
+</div>
 
-                    <hr style="border-color:#53677d">
+<div class="info">
+<strong>Universitas:</strong> Maso'em
+</div>
 
-                    <div class="text-start">
+<div class="info">
+<strong>Tempat, Tanggal Lahir:</strong> Garut 20 Mei 2008
+</div>
 
-                        <div class="bio-item">
-                            <span>Nama</span>
-                            <div>Kamila Intan Hayati</div>
-                        </div>
+<div class="info">
+<strong>Hobi:</strong> Mengarang Cerita, Mendengarkan Musik, dan Menggambar
+</div>
 
-                        <div class="bio-item">
-                            <span>NIM</span>
-                            <div>262505022</div>
-                        </div>
+<div class="info">
+<strong>Motto:</strong> Keep Learning and Never Give Up!
+</div>
 
-                        <div class="bio-item">
-                            <span>Tempat, Tanggal Lahir</span>
-                            <div>Garut 20 Mei 2008</div>
-                        </div>
-
-                        <div class="bio-item">
-                            <span>Program Studi</span>
-                            <div>Sistem Informasi</div>
-                        </div>
-
-                        <div class="bio-item">
-                            <span>Universitas</span>
-                            <div>Maso'em</div>
-                        </div>
-
-                        <div class="bio-item">
-                            <span>Email</span>
-                            <div>kamilaintan20@gmail.com</div>
-                        </div>
-
-                        <div class="bio-item">
-                            <span>Hobi</span>
-                            <div>Menggambar dan Menulis cerita</div>
-                        </div>
-
-                        <div class="bio-item">
-                            <span>Deskripsi Diri</span>
-                            <div>
-                                Saya adalah mahasiswa yang tertarik
-                                mempelajari teknologi, pemrograman,
-                                dan desain aplikasi.
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
+</div>
+</div>
+</div>
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- BUKTI BELAJAR -->
+<section id="bukti">
+<div class="container">
+
+<div class="paper">
+
+<h2 class="heading">📚 Bukti Belajar</h2>
+
+<p class="text-center">
+Kumpulan kalkulator materi Matematika Informatika.
+Silakan masukkan angka dan tekan tombol hitung!
+</p>
+
+
+<!-- KALKULATOR BINER -->
+<div class="calculator">
+
+<h3>🐱 1. Kalkulator Sistem Bilangan</h3>
+
+<label>Masukkan Angka</label>
+<input type="text" id="angka"
+class="form-control mb-3"
+placeholder="Contoh: 1010">
+
+<label>Sistem Bilangan Asal</label>
+<select id="dari" class="form-select mb-3">
+<option value="2">Biner (Basis 2)</option>
+<option value="8">Oktal (Basis 8)</option>
+<option value="10">Desimal (Basis 10)</option>
+<option value="16">Heksadesimal (Basis 16)</option>
+</select>
+
+<label>Sistem Bilangan Tujuan</label>
+<select id="ke" class="form-select mb-3">
+<option value="2">Biner (Basis 2)</option>
+<option value="8">Oktal (Basis 8)</option>
+<option value="10">Desimal (Basis 10)</option>
+<option value="16">Heksadesimal (Basis 16)</option>
+</select>
+
+<button class="btn btn-cat" onclick="konversikan()">
+Konversikan
+</button>
+
+<div class="result" id="hasil">
+Hasil: -
+</div>
+
+</div>
+
+
+<!-- KALKULATOR MODULAR -->
+<div class="calculator">
+
+<h3>🐱 2. Kalkulator Aritmetika Modular</h3>
+
+<label>Masukkan Nilai A</label>
+<input type="number" id="modA"
+class="form-control mb-3" placeholder="Nilai A">
+
+<label>Masukkan Nilai B</label>
+<input type="number" id="modB"
+class="form-control mb-3" placeholder="Nilai B">
+
+<label>Masukkan Modulus (M)</label>
+<input type="number" id="modM"
+class="form-control mb-3" placeholder="Nilai M">
+
+<label>Pilih Operasi</label>
+<select id="operasiMod" class="form-select mb-3">
+<option value="tambah">Penjumlahan (+)</option>
+<option value="kurang">Pengurangan (-)</option>
+<option value="kali">Perkalian (×)</option>
+</select>
+
+<button class="btn btn-cat" onclick="hitungModular()">
+Hitung Modular
+</button>
+
+<div class="result" id="hasilMod">
+Hasil: -
+</div>
+
+</div>
+
+
+<!-- PENGECEKAN KONGRUENSI -->
+<div class="calculator">
+
+<h3>🐾 Pengecekan Kongruensi</h3>
+
+<label>Nilai A</label>
+<input type="number" id="kongA"
+class="form-control mb-3">
+
+<label>Nilai B</label>
+<input type="number" id="kongB"
+class="form-control mb-3">
+
+<label>Modulus</label>
+<input type="number" id="kongM"
+class="form-control mb-3">
+
+<button class="btn btn-cat" onclick="cekKongruensi()">
+Cek Kongruensi
+</button>
+
+<div class="result" id="hasilKong">
+Hasil: -
+</div>
+
+</div>
+
+
+<!-- KALKULATOR KOMBINATORIKA -->
+<div class="calculator">
+
+<h3>🐱 3. Kalkulator Kombinatorika</h3>
+
+<label>Masukkan Nilai N</label>
+<input type="number" id="nilaiN"
+class="form-control mb-3" placeholder="Contoh: 5">
+
+<label>Masukkan Nilai R</label>
+<input type="number" id="nilaiR"
+class="form-control mb-3" placeholder="Contoh: 2">
+
+<label>Pilih Perhitungan</label>
+<select id="jenisKomb" class="form-select mb-3">
+<option value="faktorial">Faktorial (n!)</option>
+<option value="permutasi">Permutasi (P(n,r))</option>
+<option value="kombinasi">Kombinasi (C(n,r))</option>
+</select>
+
+<button class="btn btn-cat" onclick="hitungKombinatorika()">
+Hitung Kombinatorika
+</button>
+
+<div class="result" id="hasilKomb">
+Hasil: -
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
 
 <footer>
-    <p class="mb-0">
-        © 2026 Biodata Online Pribadi |
-        Hollow Knight Theme
-    </p>
-    <small>Created with HTML, CSS, Bootstrap & JavaScript</small>
+🐱 My Cat Journal | Biodata Online Pribadi
+<p>© 2026 - Matematika Informatika</p>
 </footer>
 
 
-<!-- ================= JAVASCRIPT ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
 
-// =====================================
-// 1. GERAKAN KARAKTER KNIGHT
-// =====================================
+// ===================================
+// 1. FUNGSI SUARA / SAPAAN KUCING
+// ===================================
 
-const knight = document.getElementById("knight");
-const arena = document.getElementById("arena");
-
-let posisiX = 50;
-let posisiY = 35;
-
-function gerak(arah) {
-
-    const lebarArena = arena.clientWidth;
-    const tinggiArena = arena.clientHeight;
-
-    // Lebar dan tinggi karakter
-    const lebarKnight = knight.offsetWidth;
-    const tinggiKnight = knight.offsetHeight;
-
-    if (arah === "kanan") {
-        posisiX += 3;
-    }
-
-    if (arah === "kiri") {
-        posisiX -= 3;
-    }
-
-    if (arah === "atas") {
-        posisiY += 3;
-    }
-
-    if (arah === "bawah") {
-        posisiY -= 3;
-    }
-
-    // Membatasi gerakan agar tidak keluar arena
-    posisiX = Math.max(
-        (lebarKnight / 2 / lebarArena) * 100,
-        Math.min(100 - (lebarKnight / 2 / lebarArena) * 100, posisiX)
-    );
-
-    posisiY = Math.max(
-        35,
-        Math.min(tinggiArena - tinggiKnight, posisiY)
-    );
-
-    knight.style.left = posisiX + "%";
-    knight.style.bottom = posisiY + "px";
+function suaraKucing() {
+    document.getElementById("pesanKucing").innerHTML =
+    "Meooow! Jangan lupa belajar hari ini! 🐱💕";
 }
 
 
-// Gerakan menggunakan keyboard
-document.addEventListener("keydown", function(event) {
+// ===================================
+// 2. KALKULATOR SISTEM BILANGAN
+// ===================================
 
-    const tombol = event.key.toLowerCase();
+function konversikan() {
 
-    if (["arrowup", "arrowdown", "arrowleft", "arrowright"].includes(tombol)) {
-        event.preventDefault();
-    }
-
-    if (tombol === "w" || tombol === "arrowup") {
-        gerak("atas");
-    }
-
-    if (tombol === "s" || tombol === "arrowdown") {
-        gerak("bawah");
-    }
-
-    if (tombol === "a" || tombol === "arrowleft") {
-        gerak("kiri");
-    }
-
-    if (tombol === "d" || tombol === "arrowright") {
-        gerak("kanan");
-    }
-
-});
-
-
-// =====================================
-// 2. KALKULATOR SISTEM BILANGAN BINER
-// =====================================
-
-function hitungBiner() {
-
-    let angka = document.getElementById("angkaBiner").value.trim();
-
-    let jenis = document.getElementById("jenisBiner").value;
-
-    let hasil;
+    let angka = document.getElementById("angka").value.trim();
+    let dari = Number(document.getElementById("dari").value);
+    let ke = Number(document.getElementById("ke").value);
+    let hasil = document.getElementById("hasil");
 
     if (angka === "") {
-        alert("Masukkan bilangan terlebih dahulu!");
+        hasil.innerHTML = "Masukkan angka terlebih dahulu!";
         return;
     }
 
-    if (jenis === "keDesimal") {
+    // Validasi karakter berdasarkan basis
+    let pola = {
+        2: /^[01]+$/,
+        8: /^[0-7]+$/,
+        10: /^[0-9]+$/,
+        16: /^[0-9a-fA-F]+$/
+    };
 
-        // Memastikan input hanya berisi 0 dan 1
-        if (!/^[01]+$/.test(angka)) {
-            alert("Bilangan biner hanya boleh berisi 0 dan 1!");
-            return;
-        }
-
-        hasil = BigInt("0b" + angka).toString(10);
-
-    } else {
-
-        // Memastikan input adalah bilangan desimal
-        if (!/^\d+$/.test(angka)) {
-            alert("Masukkan bilangan desimal bulat positif!");
-            return;
-        }
-
-        hasil = BigInt(angka).toString(2);
-
+    if (!pola[dari].test(angka)) {
+        hasil.innerHTML = "Angka tidak valid untuk basis " + dari;
+        return;
     }
 
-    document.getElementById("hasilBiner").innerHTML =
-        "Hasil: " + hasil;
+    let desimal = parseInt(angka, dari);
 
+    hasil.innerHTML =
+        "Hasil Konversi: " +
+        desimal.toString(ke).toUpperCase();
 }
 
 
-// =====================================
+// ===================================
 // 3. KALKULATOR ARITMETIKA MODULAR
-// =====================================
+// ===================================
 
 function hitungModular() {
 
-    let a = document.getElementById("modA").value.trim();
-    let b = document.getElementById("modB").value.trim();
-    let m = document.getElementById("modM").value.trim();
+    let a = Number(document.getElementById("modA").value);
+    let b = Number(document.getElementById("modB").value);
+    let m = Number(document.getElementById("modM").value);
 
-    let operasi = document.getElementById("jenisMod").value;
+    let operasi = document.getElementById("operasiMod").value;
+    let hasil = document.getElementById("hasilMod");
 
-    // Validasi input bilangan bulat
-    if (!/^-?\d+$/.test(a) ||
-        !/^-?\d+$/.test(b) ||
-        !/^\d+$/.test(m)) {
-
-        alert("Masukkan bilangan bulat yang valid!");
+    if (
+        document.getElementById("modA").value === "" ||
+        document.getElementById("modB").value === "" ||
+        document.getElementById("modM").value === "" ||
+        !Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(m) ||
+        m <= 0
+    ) {
+        hasil.innerHTML = "Masukkan bilangan bulat valid dan modulus positif!";
         return;
     }
 
-    let A = BigInt(a);
-    let B = BigInt(b);
-    let M = BigInt(m);
-
-    if (M <= 0n) {
-        alert("Modulus harus lebih besar dari nol!");
-        return;
-    }
-
-    let hasil;
+    let nilai;
+    let simbol;
 
     switch (operasi) {
 
         case "tambah":
-            hasil = A + B;
+            nilai = a + b;
+            simbol = "+";
             break;
 
         case "kurang":
-            hasil = A - B;
+            nilai = a - b;
+            simbol = "-";
             break;
 
         case "kali":
-            hasil = A * B;
-            break;
-
-        case "pangkat":
-
-            if (B < 0n) {
-                alert("Pangkat harus bilangan bulat nonnegatif!");
-                return;
-            }
-
-            // Perpangkatan modular
-            let basis = ((A % M) + M) % M;
-            let pangkat = B;
-            hasil = 1n % M;
-
-            while (pangkat > 0n) {
-
-                if (pangkat % 2n === 1n) {
-                    hasil = (hasil * basis) % M;
-                }
-
-                basis = (basis * basis) % M;
-                pangkat = pangkat / 2n;
-            }
-
+            nilai = a * b;
+            simbol = "×";
             break;
     }
 
-    // Menyesuaikan sisa agar selalu positif
-    hasil = ((hasil % M) + M) % M;
+    if (!Number.isSafeInteger(nilai)) {
+        hasil.innerHTML = "Angka terlalu besar untuk perhitungan ini!";
+        return;
+    }
 
-    document.getElementById("hasilMod").innerHTML =
-        "Hasil: " + hasil.toString();
+    let modulo = ((nilai % m) + m) % m;
 
+    hasil.innerHTML =
+        "(" + a + " " + simbol + " " + b + ") mod " + m +
+        " = <strong>" + modulo + "</strong>";
 }
 
 
-// =====================================
-// 4. KALKULATOR KOMBINATORIKA
-// =====================================
+// ===================================
+// 4. PENGECEKAN KONGRUENSI
+// ===================================
 
-// Fungsi faktorial
+function cekKongruensi() {
+
+    let a = Number(document.getElementById("kongA").value);
+    let b = Number(document.getElementById("kongB").value);
+    let m = Number(document.getElementById("kongM").value);
+
+    let hasil = document.getElementById("hasilKong");
+
+    if (
+        document.getElementById("kongA").value === "" ||
+        document.getElementById("kongB").value === "" ||
+        document.getElementById("kongM").value === "" ||
+        !Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(m) ||
+        m <= 0
+    ) {
+        hasil.innerHTML = "Masukkan angka bulat yang valid!";
+        return;
+    }
+
+    let sisaA = ((a % m) + m) % m;
+    let sisaB = ((b % m) + m) % m;
+
+    if (sisaA === sisaB) {
+
+        hasil.innerHTML =
+            a + " ≡ " + b + " (mod " + m + ")" +
+            "<br>🐱 KONGRUEN";
+
+    } else {
+
+        hasil.innerHTML =
+            a + " ≢ " + b + " (mod " + m + ")" +
+            "<br>🐾 TIDAK KONGRUEN";
+    }
+}
+
+
+// ===================================
+// 5. FUNGSI FAKTORIAL
+// ===================================
+
 function faktorial(n) {
 
     let hasil = 1n;
 
-    for (let i = 2n; i <= n; i++) {
+    for (let i = 1n; i <= BigInt(n); i++) {
         hasil *= i;
     }
 
@@ -811,58 +643,98 @@ function faktorial(n) {
 }
 
 
-// Fungsi permutasi dan kombinasi
+// ===================================
+// 6. FUNGSI PERMUTASI
+// P(n,r) = n! / (n-r)!
+// ===================================
+
+function permutasi(n, r) {
+
+    let hasil = 1n;
+
+    for (let i = 0; i < r; i++) {
+        hasil *= BigInt(n - i);
+    }
+
+    return hasil;
+}
+
+
+// ===================================
+// 7. FUNGSI KOMBINASI
+// C(n,r) = n! / (r!(n-r)!)
+// ===================================
+
+function kombinasi(n, r) {
+
+    r = Math.min(r, n - r);
+
+    let hasil = 1n;
+
+    for (let i = 1; i <= r; i++) {
+
+        hasil = hasil * BigInt(n - r + i) / BigInt(i);
+
+    }
+
+    return hasil;
+}
+
+
+// ===================================
+// 8. KALKULATOR KOMBINATORIKA
+// ===================================
+
 function hitungKombinatorika() {
 
-    let n = document.getElementById("nilaiN").value.trim();
-    let r = document.getElementById("nilaiR").value.trim();
+    let n = Number(document.getElementById("nilaiN").value);
+    let r = Number(document.getElementById("nilaiR").value);
 
-    let jenis = document.getElementById("jenisKombinasi").value;
+    let jenis = document.getElementById("jenisKomb").value;
+    let hasil = document.getElementById("hasilKomb");
 
-    if (!/^\d+$/.test(n) || !/^\d+$/.test(r)) {
-        alert("Masukkan nilai n dan r berupa bilangan bulat nonnegatif!");
+    if (
+        document.getElementById("nilaiN").value === "" ||
+        document.getElementById("nilaiR").value === "" ||
+        !Number.isInteger(n) ||
+        !Number.isInteger(r) ||
+        n < 0 ||
+        r < 0 ||
+        r > n ||
+        n > 1000
+    ) {
+        hasil.innerHTML =
+            "Masukkan bilangan bulat dengan syarat 0 ≤ r ≤ n ≤ 1000!";
         return;
     }
 
-    let N = BigInt(n);
-    let R = BigInt(r);
+    let nilai;
+    let rumus;
 
-    if (R > N) {
-        alert("Nilai r tidak boleh lebih besar dari n!");
-        return;
+    switch (jenis) {
+
+        case "faktorial":
+            nilai = faktorial(n);
+            rumus = n + "! = " + n + " × ... × 1";
+            break;
+
+        case "permutasi":
+            nilai = permutasi(n, r);
+            rumus = "P(" + n + "," + r + ") = n! / (n-r)!";
+            break;
+
+        case "kombinasi":
+            nilai = kombinasi(n, r);
+            rumus = "C(" + n + "," + r + ") = n! / (r!(n-r)!)";
+            break;
     }
 
-    let hasil;
-
-    if (jenis === "permutasi") {
-
-        // Rumus nPr = n! / (n-r)!
-        hasil = faktorial(N) / faktorial(N - R);
-
-    } else {
-
-        // Rumus nCr = n! / (r! * (n-r)!)
-        // Gunakan nilai r terkecil agar lebih efisien
-        let k = R < N - R ? R : N - R;
-
-        hasil = 1n;
-
-        for (let i = 1n; i <= k; i++) {
-            hasil = hasil * (N - k + i) / i;
-        }
-
-    }
-
-    document.getElementById("hasilKombinasi").innerHTML =
-        "Hasil: " + hasil.toString();
-
+    hasil.innerHTML =
+        "Rumus: " + rumus +
+        "<br>Hasil: <strong>" + nilai.toString() + "</strong>";
 }
 
 </script>
-
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
