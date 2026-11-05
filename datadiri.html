@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Online - Bukti Belajar</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --kuning: #ffd600;
+            --hitam: #080808;
+            --abu: #171717;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #101010;
+            border-bottom: 1px solid #333;
+        }
+
+        .navbar-brand {
+            color: var(--kuning) !important;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: var(--kuning) !important;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 75px);
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--kuning);
+        }
+
+        .hero p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        .btn-kuning {
+            background: var(--kuning);
+            color: black;
+            font-weight: bold;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: .3s;
+        }
+
+        .btn-kuning:hover {
+            background: white;
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        /* DEKORASI */
+        .dekorasi {
+            position: absolute;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bulat {
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--kuning);
+            border-radius: 50%;
+            top: 15%;
+            right: 10%;
+        }
+
+        .persegi {
+            width: 65px;
+            height: 65px;
+            background: var(--kuning);
+            transform: rotate(25deg);
+            bottom: 15%;
+            right: 25%;
+        }
+
+        .spiral {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            top: 45%;
+            right: 3%;
+            background: repeating-conic-gradient(
+                var(--kuning) 0deg 8deg,
+                transparent 8deg 16deg
+            );
+            -webkit-mask: radial-gradient(
+                circle,
+                transparent 0 15%,
+                black 16% 65%,
+                transparent 66%
+            );
+            mask: radial-gradient(
+                circle,
+                transparent 0 15%,
+                black 16% 65%,
+                transparent 66%
+            );
+        }
+
+        /* SECTION */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .judul-section {
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .judul-section span {
+            color: var(--kuning);
+        }
+
+        .garis {
+            width: 70px;
+            height: 5px;
+            background: var(--kuning);
+            margin-bottom: 40px;
+        }
+
+        /* BIODATA */
+        .biodata-card,
+        .kalkulator-card {
+            background: var(--abu);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            height: 100%;
+            transition: .3s;
+        }
+
+        .biodata-card:hover,
+        .kalkulator-card:hover {
+            border-color: var(--kuning);
+            transform: translateY(-5px);
+        }
+
+        .foto {
+            width: 150px;
+            height: 150px;
+            border: 4px solid var(--kuning);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            color: var(--kuning);
+            font-size: 50px;
+            background: #222;
+        }
+
+        .biodata-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .biodata-item strong {
+            color: var(--kuning);
+        }
+
+        /* KALKULATOR */
+        .kalkulator-card h4 {
+            color: var(--kuning);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-control,
+        .form-select {
+            background: #080808;
+            color: white;
+            border: 1px solid #444;
+            padding: 12px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background: #080808;
+            color: white;
+            border-color: var(--kuning);
+            box-shadow: 0 0 5px var(--kuning);
+        }
+
+        .form-select option {
+            background: #111;
+            color: white;
+        }
+
+        label {
+            margin-bottom: 7px;
+            color: #ddd;
+        }
+
+        .hasil {
+            background: #080808;
+            border: 1px dashed var(--kuning);
+            color: var(--kuning);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 55px;
+            font-size: 18px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .deskripsi {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            border-top: 1px solid #333;
+            padding: 25px;
+            text-align: center;
+            color: #999;
+        }
+
+        footer span {
+            color: var(--kuning);
+        }
+
+        @media(max-width: 768px) {
+            .hero {
+                min-height: 65vh;
+            }
+
+            .spiral {
+                width: 90px;
+                height: 90px;
+            }
+
+            .judul-section {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">MY PORTOFOLIO.</a>
+
+        <button class="navbar-toggler bg-warning" type="button"
+            data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#biodata">Biodata</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#belajar">Bukti Belajar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="dekorasi bulat"></div>
+    <div class="dekorasi persegi"></div>
+    <div class="dekorasi spiral"></div>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+
+                <p class="text-warning fw-bold">
+                    WELCOME TO MY PERSONAL WEBSITE
+                </p>
+
+                <h1>
+                    HALO, SAYA<br>
+                    <span>NAMA KAMU.</span>
+                </h1>
+
+                <p class="mt-3">
+                    Selamat datang di Biodata Online Pribadi saya.
+                    Website ini berisi informasi pribadi,
+                    perjalanan belajar, serta kumpulan kalkulator
+                    Matematika Informatika sebagai bukti pembelajaran.
+                </p>
+
+                <a href="#belajar" class="btn btn-kuning mt-3">
+                    Lihat Bukti Belajar
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- BIODATA -->
+<section id="biodata">
+
+    <div class="container">
+
+        <h2 class="judul-section">
+            BIODATA <span>PRIBADI</span>
+        </h2>
+
+        <div class="garis"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="biodata-card text-center">
+
+                    <div class="foto mb-4">
+                        <span>👤</span>
+                    </div>
+
+                    <h3 class="text-warning">NAMA LENGKAP KAMU</h3>
+                    <p class="text-secondary">
+                        Mahasiswa Teknik Informatika
+                    </p>
+
+                    <hr class="border-secondary">
+
+                    <div class="text-start">
+
+                        <div class="biodata-item">
+                            <strong>Nama:</strong>
+                            <span> Nama Kamu</span>
+                        </div>
+
+                        <div class="biodata-item">
+                            <strong>NIM:</strong>
+                            <span> 123456789</span>
+                        </div>
+
+                        <div class="biodata-item">
+                            <strong>Program Studi:</strong>
+                            <span> Teknik Informatika</span>
+                        </div>
+
+                        <div class="biodata-item">
+                            <strong>Universitas:</strong>
+                            <span> Nama Universitas</span>
+                        </div>
+
+                        <div class="biodata-item">
+                            <strong>Mata Kuliah:</strong>
+                            <span> Matematika Informatika</span>
+                        </div>
+
+                        <div class="biodata-item">
+                            <strong>Hobi:</strong>
+                            <span> Belajar dan Coding</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- BUKTI BELAJAR -->
+<section id="belajar">
+
+    <div class="container">
+
+        <h2 class="judul-section">
+            BUKTI <span>BELAJAR.</span>
+        </h2>
+
+        <p class="deskripsi">
+            Kumpulan aplikasi kalkulator interaktif
+            dari materi Matematika Informatika.
+        </p>
+
+        <div class="garis"></div>
+
+        <div class="row g-4">
+
+            <!-- 1. KONVERSI BILANGAN -->
+            <div class="col-md-6">
+                <div class="kalkulator-card">
+
+                    <h4>01. Konversi Sistem Bilangan</h4>
+
+                    <p class="deskripsi">
+                        Mengubah bilangan Biner, Oktal,
+                        Desimal dan Heksadesimal.
+                    </p>
+
+                    <label>Masukkan Angka</label>
+                    <input type="text" id="angka"
+                        class="form-control mb-3"
+                        placeholder="Contoh: 1010">
+
+                    <label>Sistem Bilangan Asal</label>
+                    <select id="asal" class="form-select mb-3">
+                        <option value="2">Biner</option>
+                        <option value="8">Oktal</option>
+                        <option value="10" selected>Desimal</option>
+                        <option value="16">Heksadesimal</option>
+                    </select>
+
+                    <label>Sistem Bilangan Tujuan</label>
+                    <select id="tujuan" class="form-select mb-3">
+                        <option value="2">Biner</option>
+                        <option value="8">Oktal</option>
+                        <option value="10">Desimal</option>
+                        <option value="16">Heksadesimal</option>
+                    </select>
+
+                    <button class="btn btn-kuning w-100"
+                        onclick="konversikan()">
+                        Konversikan
+                    </button>
+
+                    <div class="hasil" id="hasilKonversi">
+                        Hasil akan muncul di sini
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 2. ARITMETIKA MODULAR -->
+            <div class="col-md-6">
+                <div class="kalkulator-card">
+
+                    <h4>02. Aritmetika Modular</h4>
+
+                    <p class="deskripsi">
+                        Menghitung operasi penjumlahan,
+                        pengurangan dan perkalian modulo.
+                    </p>
+
+                    <label>Bilangan A</label>
+                    <input type="number" id="nilaiA"
+                        class="form-control mb-3"
+                        placeholder="Masukkan A">
+
+                    <label>Bilangan B</label>
+                    <input type="number" id="nilaiB"
+                        class="form-control mb-3"
+                        placeholder="Masukkan B">
+
+                    <label>Modulus</label>
+                    <input type="number" id="modulus"
+                        class="form-control mb-3"
+                        placeholder="Masukkan modulus">
+
+                    <label>Operasi</label>
+                    <select id="operasi" class="form-select mb-3">
+                        <option value="tambah">Penjumlahan (+)</option>
+                        <option value="kurang">Pengurangan (-)</option>
+                        <option value="kali">Perkalian (×)</option>
+                    </select>
+
+                    <button class="btn btn-kuning w-100"
+                        onclick="aritmetikaModular()">
+                        Hitung
+                    </button>
+
+                    <div class="hasil" id="hasilModular">
+                        Hasil akan muncul di sini
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 3. KONGRUENSI -->
+            <div class="col-md-6">
+                <div class="kalkulator-card">
+
+                    <h4>03. Pengecek Kongruensi</h4>
+
+                    <p class="deskripsi">
+                        Memeriksa apakah dua bilangan
+                        memiliki sisa pembagian yang sama.
+                    </p>
+
+                    <label>Bilangan A</label>
+                    <input type="number" id="kongruenA"
+                        class="form-control mb-3"
+                        placeholder="Masukkan A">
+
+                    <label>Bilangan B</label>
+                    <input type="number" id="kongruenB"
+                        class="form-control mb-3"
+                        placeholder="Masukkan B">
+
+                    <label>Modulus</label>
+                    <input type="number" id="kongruenMod"
+                        class="form-control mb-3"
+                        placeholder="Masukkan modulus">
+
+                    <button class="btn btn-kuning w-100"
+                        onclick="cekKongruensi()">
+                        Cek Kongruensi
+                    </button>
+
+                    <div class="hasil" id="hasilKongruensi">
+                        Hasil akan muncul di sini
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 4. FPB DAN KPK -->
+            <div class="col-md-6">
+                <div class="kalkulator-card">
+
+                    <h4>04. Kalkulator FPB dan KPK</h4>
+
+                    <p class="deskripsi">
+                        Menghitung Faktor Persekutuan Terbesar
+                        dan Kelipatan Persekutuan Terkecil.
+                    </p>
+
+                    <label>Bilangan Pertama</label>
+                    <input type="number" id="bilangan1"
+                        class="form-control mb-3"
+                        placeholder="Contoh: 12">
+
+                    <label>Bilangan Kedua</label>
+                    <input type="number" id="bilangan2"
+                        class="form-control mb-3"
+                        placeholder="Contoh: 18">
+
+                    <button class="btn btn-kuning w-100"
+                        onclick="hitungFPBKPK()">
+                        Hitung FPB dan KPK
+                    </button>
+
+                    <div class="hasil" id="hasilFPB">
+                        Hasil akan muncul di sini
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 5. BILANGAN PRIMA -->
+            <div class="col-md-6">
+                <div class="kalkulator-card">
+
+                    <h4>05. Pengecek Bilangan Prima</h4>
+
+                    <p class="deskripsi">
+                        Menentukan apakah suatu bilangan
+                        termasuk bilangan prima atau bukan.
+                    </p>
+
+                    <label>Masukkan Bilangan</label>
+                    <input type="number" id="bilanganPrima"
+                        class="form-control mb-3"
+                        placeholder="Contoh: 7">
+
+                    <button class="btn btn-kuning w-100"
+                        onclick="cekPrima()">
+                        Periksa Bilangan
+                    </button>
+
+                    <div class="hasil" id="hasilPrima">
+                        Hasil akan muncul di sini
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+    <p class="mb-0">
+        © 2026 <span>Biodata Online Pribadi.</span>
+        Dibuat dengan HTML, CSS, Bootstrap dan JavaScript.
+    </p>
+</footer>
+
+
+<!-- JAVASCRIPT -->
+<script>
+
+// ==================================
+// 1. KONVERSI SISTEM BILANGAN
+// ==================================
+
+function konversikan() {
+
+    let angka = document.getElementById("angka").value.trim();
+    let asal = Number(document.getElementById("asal").value);
+    let tujuan = Number(document.getElementById("tujuan").value);
+
+    if (angka === "") {
+        alert("Silakan masukkan angka!");
+        return;
+    }
+
+    try {
+        let negatif = angka.startsWith("-");
+        let digit = negatif ? angka.slice(1) : angka;
+
+        if (!digit || !/^[0-9a-fA-F]+$/.test(digit)) {
+            throw new Error();
+        }
+
+        let nilai = 0n;
+
+        for (let karakter of digit.toLowerCase()) {
+            let angkaDigit = parseInt(karakter, 16);
+
+            if (angkaDigit >= asal) {
+                throw new Error();
+            }
+
+            nilai = nilai * BigInt(asal) + BigInt(angkaDigit);
+        }
+
+        if (negatif) nilai = -nilai;
+
+        let hasil = nilai.toString(tujuan).toUpperCase();
+
+        document.getElementById("hasilKonversi").innerHTML =
+            "Hasil: " + hasil;
+
+    } catch {
+        document.getElementById("hasilKonversi").innerHTML =
+            "Angka tidak valid!";
+    }
+}
+
+
+// ==================================
+// 2. ARITMETIKA MODULAR
+// ==================================
+
+function aritmetikaModular() {
+
+    let a = Number(document.getElementById("nilaiA").value);
+    let b = Number(document.getElementById("nilaiB").value);
+    let m = Number(document.getElementById("modulus").value);
+
+    let operasi = document.getElementById("operasi").value;
+
+    if (!Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(m) || m <= 0) {
+
+        alert("Masukkan bilangan bulat dan modulus positif!");
+        return;
+    }
+
+    let hasil;
+
+    if (operasi === "tambah") {
+        hasil = ((a % m) + (b % m)) % m;
+    }
+
+    else if (operasi === "kurang") {
+        hasil = ((a % m) - (b % m)) % m;
+    }
+
+    else {
+        hasil = ((a % m) * (b % m)) % m;
+    }
+
+    // Memastikan sisa tidak negatif
+    hasil = (hasil + m) % m;
+
+    document.getElementById("hasilModular").innerHTML =
+        "Hasil: " + hasil;
+}
+
+
+// ==================================
+// 3. PENGECEK KONGRUENSI
+// ==================================
+
+function cekKongruensi() {
+
+    let a = Number(document.getElementById("kongruenA").value);
+    let b = Number(document.getElementById("kongruenB").value);
+    let m = Number(document.getElementById("kongruenMod").value);
+
+    if (!Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) ||
+        !Number.isSafeInteger(m) || m <= 0) {
+
+        alert("Masukkan bilangan bulat dan modulus positif!");
+        return;
+    }
+
+    let sisaA = ((a % m) + m) % m;
+    let sisaB = ((b % m) + m) % m;
+
+    let hasil = "";
+
+    if (sisaA === sisaB) {
+
+        hasil = a + " ≡ " + b + " (mod " + m + ")" +
+            "<br>SISA: " + sisaA +
+            "<br>STATUS: KONGRUEN";
+
+    } else {
+
+        hasil = a + " ≢ " + b + " (mod " + m + ")" +
+            "<br>Sisa A: " + sisaA +
+            "<br>Sisa B: " + sisaB +
+            "<br>STATUS: TIDAK KONGRUEN";
+    }
+
+    document.getElementById("hasilKongruensi").innerHTML = hasil;
+}
+
+
+// ==================================
+// 4. FPB DAN KPK
+// ==================================
+
+function hitungFPB(a, b) {
+
+    a = Math.abs(a);
+    b = Math.abs(b);
+
+    while (b !== 0) {
+
+        let sisa = a % b;
+
+        a = b;
+        b = sisa;
+    }
+
+    return a;
+}
+
+function hitungFPBKPK() {
+
+    let a = Number(document.getElementById("bilangan1").value);
+    let b = Number(document.getElementById("bilangan2").value);
+
+    if (!Number.isSafeInteger(a) ||
+        !Number.isSafeInteger(b) || a === 0 || b === 0) {
+
+        alert("Masukkan dua bilangan bulat bukan nol!");
+        return;
+    }
+
+    let fpb = hitungFPB(a, b);
+    let kpk = Math.abs((a / fpb) * b);
+
+    document.getElementById("hasilFPB").innerHTML =
+        "FPB = " + fpb +
+        "<br>KPK = " + kpk;
+}
+
+
+// ==================================
+// 5. BILANGAN PRIMA
+// ==================================
+
+function cekPrima() {
+
+    let angka = Number(document.getElementById("bilanganPrima").value);
+
+    if (!Number.isSafeInteger(angka)) {
+        alert("Masukkan bilangan bulat yang valid!");
+        return;
+    }
+
+    if (angka > 1000000000000) {
+        alert("Masukkan bilangan maksimal 1 triliun untuk pemeriksaan ini!");
+        return;
+    }
+
+    let prima = angka >= 2;
+
+    for (let i = 2; i <= Math.sqrt(angka); i++) {
+
+        if (angka % i === 0) {
+            prima = false;
+            break;
+        }
+    }
+
+    if (prima) {
+
+        document.getElementById("hasilPrima").innerHTML =
+            angka + " adalah BILANGAN PRIMA";
+
+    } else {
+
+        document.getElementById("hasilPrima").innerHTML =
+            angka + " BUKAN bilangan prima";
+    }
+}
+
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
